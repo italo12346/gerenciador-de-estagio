@@ -15,6 +15,7 @@ public class Aluno {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String nome;
+    private String curso;
 
     @ManyToOne
     @JoinColumn(name = "orientador_id")
@@ -44,7 +45,13 @@ public class Aluno {
     public void setNome(String nome) {
         this.nome = nome;
     }
+    public String getCurso() {
+        return curso;
+    }
 
+    public void setCurso(String curso) {
+        this.curso = curso;
+    }
     public Orientador getOrientador() {
         return orientador;
     }

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://xmlns.jcp.org/jsf/html">
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
 
 	<meta charset="UTF-8" />
@@ -10,25 +11,43 @@
 
 </h:head>
 
-<body>
+<h:body>
 	<header>
-		<h:graphicImage library="estilos" name="logo.png" />
+		<h:graphicImage library="estilos" name="logo.png" width="50" height="35"/>
 	</header>
-	<h:panelGrid>
-	<h:form>
-		<h:outputText value="Nome" />
-		<h:inputText value="Seu nome" />
-		<h:outputText value="Orientador" />
-		<h:selectOneMenu >
-		</h:selectOneMenu>
-		<h:outputText value="Estagio" />
-		<h:selectOneMenu>
-
-		</h:selectOneMenu>
-		
+	<div id="conteudo">
+		<h:form>
+		<h1>Cadastro de Aluno</h1>
+			<h:panelGrid columns="2">			
+				<h:outputLabel value="Nome:" for="nome"/>
+				<h:inputText id="nome" value=" "/>
+				<h:outputLabel value="Curso:" for="curso"/>
+				<h:inputText id="curso"/>
+				<h:outputLabel value="Orientador:" />
+				<h:selectOneMenu>
+				<f:selectItem itemLabel="Selecione"/>
+				<f:selectItem itemLabel="#{gestaoAlunosBean.orientador.nome}" itemValue=""/>
+				</h:selectOneMenu>
+				<h:outputLabel />
+				<h:commandButton value="Enviar" actionListener="#{gestaoAlunosBean.salvar}"/>
+			</h:panelGrid>
+			<h:dataTable value="#{[0,0,0,0]}">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Name"/>
+					</f:facet>
+					<h:outputText value="Nome do aluno"/>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Curso"/>
+					</f:facet>
+					<h:outputText value="Curso"/>
+				</h:column>
+			</h:dataTable>
 		</h:form>
-	</h:panelGrid>
-	<footer> Curso online "JSF e PrimeFaces Essencial" </footer>
-</body>
+	</div>
+	<footer> Gerenciador de Estagios </footer>
+</h:body>
 
 </html>

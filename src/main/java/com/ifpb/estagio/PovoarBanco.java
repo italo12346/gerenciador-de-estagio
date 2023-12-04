@@ -32,8 +32,8 @@ public class PovoarBanco {
             entityManager.persist(empresa2);
 
             // Povoamento de Alunos
-            Aluno aluno1 = criarAluno("Lucas", orientador1, empresa1);
-            Aluno aluno2 = criarAluno("Maria", orientador2, empresa2);
+            Aluno aluno1 = criarAluno("Lucas","ADS", orientador1, empresa1);
+            Aluno aluno2 = criarAluno("Maria","Automação", orientador2, empresa2);
             entityManager.persist(aluno1);
             entityManager.persist(aluno2);
 
@@ -76,9 +76,10 @@ public class PovoarBanco {
         return empresa;
     }
 
-    private static Aluno criarAluno(String nome, Orientador orientador, Empresa empresa) {
+    private static Aluno criarAluno(String nome, String curso, Orientador orientador, Empresa empresa) {
         Aluno aluno = new Aluno();
         aluno.setNome(nome);
+        aluno.setCurso(curso);
         aluno.setOrientador(orientador);
         aluno.setEmpresa(empresa);
         return aluno;

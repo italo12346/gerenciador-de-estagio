@@ -20,6 +20,7 @@ public class Main {
             // Adicionando aluno
             Aluno aluno = new Aluno();
             aluno.setNome("luiza");
+            aluno.setCurso("ADS");
 
             // Adicionando orientador
             Orientador orientador = new Orientador();
