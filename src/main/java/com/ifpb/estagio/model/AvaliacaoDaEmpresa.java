@@ -4,54 +4,80 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.JoinColumn;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "avaliacao_da_empresa")
 public class AvaliacaoDaEmpresa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
-    private int nota;
-    private String comentario;
+    @Column(nullable = false)
+    private String rendimentoDeTrabalho;
 
-    @ManyToOne
-    @JoinColumn(name = "aluno_id")
-    private Aluno aluno;
+    @Column(nullable = false)
+    private String conhecimentos;
 
-    // Getters e Setters
+    @Column(nullable = false)
+    private String cumprimentoDasTarefas;
 
-    public int getId() {
-        return id;
-    }
+    @Column(nullable = false)
+    private String aprendizagem;
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    @Column(nullable = false)
+    private String desempenho;
 
-    public int getNota() {
-        return nota;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setNota(int nota) {
-        this.nota = nota;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public String getComentario() {
-        return comentario;
-    }
+	public String getRendimentoDeTrabalho() {
+		return rendimentoDeTrabalho;
+	}
 
-    public void setComentario(String comentario) {
-        this.comentario = comentario;
-    }
+	public void setRendimentoDeTrabalho(String rendimentoDeTrabalho) {
+		this.rendimentoDeTrabalho = rendimentoDeTrabalho;
+	}
 
-    public Aluno getAluno() {
-        return aluno;
-    }
+	public String getConhecimentos() {
+		return conhecimentos;
+	}
 
-    public void setAluno(Aluno aluno) {
-        this.aluno = aluno;
-    }
+	public void setConhecimentos(String conhecimentos) {
+		this.conhecimentos = conhecimentos;
+	}
+
+	public String getCumprimentoDasTarefas() {
+		return cumprimentoDasTarefas;
+	}
+
+	public void setCumprimentoDasTarefas(String cumprimentoDasTarefas) {
+		this.cumprimentoDasTarefas = cumprimentoDasTarefas;
+	}
+
+	public String getAprendizagem() {
+		return aprendizagem;
+	}
+
+	public void setAprendizagem(String aprendizagem) {
+		this.aprendizagem = aprendizagem;
+	}
+
+	public String getDesempenho() {
+		return desempenho;
+	}
+
+	public void setDesempenho(String desempenho) {
+		this.desempenho = desempenho;
+	}
+
+    // Getters and setters
+    
+    
 }

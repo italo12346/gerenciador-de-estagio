@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 <h:head>
 
 	<meta charset="UTF-8" />
@@ -13,13 +14,26 @@
 
 <h:body>
 	<header>
-		<h:graphicImage library="estilos" name="logo.png" width="50" height="35"/>
+		<h:graphicImage library="estilos" name="logo.png" width="50"
+			height="35" />
 	</header>
 	<div id="conteudo">
 		<h:form>
-		<h1>Tempalte</h1>
+			<h1>Tempalte</h1>
 			<h:panelGrid columns="2">
-				<h:commandLink value="Voltar" action="#{gestaoAlunosBean.voltar}" />
+				<p:outputLabel value="Avaliação de Orientador"/>
+					<p:selectOneRadio value="Proatividade">
+						<f:selectItem itemLabel="ruim"/>
+						<f:selectItem itemLabel="bom"/>
+						<f:selectItem itemLabel="regular"/>
+						<f:selectItem itemLabel="muito bom"/>
+						<p:ajax event ="click" update="input" process="@this"/>
+					</p:selectOneRadio>
+					<h:panelGroup id="input">
+						<p:inputMask mask="999.999.999-99" value="CPF" id="cpf"/>
+					</h:panelGroup>
+					<p:selectOneMenu value=""></p:selectOneMenu>
+					<h:commandLink value="Voltar" action="#{gestaoAlunosBean.voltar}" />
 			</h:panelGrid>
 		</h:form>
 	</div>

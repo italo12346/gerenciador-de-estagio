@@ -1,57 +1,81 @@
 package com.ifpb.estagio.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.JoinColumn;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "avaliacao_de_orientador")
 public class AvaliacaoDoOrientador {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
-    private int nota;
-    private String comentario;
+    @Column(nullable = false)
+    private String assiduidade;
 
-    @ManyToOne
-    @JoinColumn(name = "aluno_id")
-    private Aluno aluno;
+    @Column(nullable = false)
+    private String disciplina;
 
-    // Getters e Setters
+    @Column(nullable = false)
+    private String sociabilidade;
 
-    public int getId() {
-        return id;
-    }
+    @Column(nullable = false)
+    private String responsabilidade;
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    @Column(nullable = false)
+    private String iniciativaSensoCritico;
 
-    public int getNota() {
-        return nota;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setNota(int nota) {
-        this.nota = nota;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public String getComentario() {
-        return comentario;
-    }
+	public String getAssiduidade() {
+		return assiduidade;
+	}
 
-    public void setComentario(String comentario) {
-        this.comentario = comentario;
-    }
+	public void setAssiduidade(String assiduidade) {
+		this.assiduidade = assiduidade;
+	}
 
-    public Aluno getAluno() {
-        return aluno;
-    }
+	public String getDisciplina() {
+		return disciplina;
+	}
 
-    public void setAluno(Aluno aluno) {
-        this.aluno = aluno;
-    }
+	public void setDisciplina(String disciplina) {
+		this.disciplina = disciplina;
+	}
+
+	public String getSociabilidade() {
+		return sociabilidade;
+	}
+
+	public void setSociabilidade(String sociabilidade) {
+		this.sociabilidade = sociabilidade;
+	}
+
+	public String getResponsabilidade() {
+		return responsabilidade;
+	}
+
+	public void setResponsabilidade(String responsabilidade) {
+		this.responsabilidade = responsabilidade;
+	}
+
+	public String getIniciativaSensoCritico() {
+		return iniciativaSensoCritico;
+	}
+
+	public void setIniciativaSensoCritico(String iniciativaSensoCritico) {
+		this.iniciativaSensoCritico = iniciativaSensoCritico;
+	}
+
 }
