@@ -4,7 +4,7 @@ body {
 	font-size: 12px;
 	font-family: Arial, Helvetica, sans-serif;
 	margin: 0px;
-	font-weight: normal
+	font-weight: normal;
 }
 
 header {
@@ -13,25 +13,49 @@ header {
 	height: 30px;
 	background-color: #545454;
 	color: #fff;
-	box-shadow: 0px 2px 2px #ccc
+	box-shadow: 0px 2px 2px #ccc;
 }
 
 #conteudo {
 	display: flex;
+	flex-direction: column;
+	justify-content: center;
 	padding-left: 5px;
+	font-size: 18;
+	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
-
+#form{
+	display: flex;
+	flex-direction: column;
+	margin-left: 30%;
+	margin-right: 30%;	
+}
+.inputs{
+	display: flex;
+	justify-content: center;
+}
+.buttons{
+	display: flex;
+	flex: 1;
+	justify-content: center;
+	margin-left: 20px;
+}
 footer {
 	border-top: 1px solid #ccc;
 	padding: 5px 8px;
 	margin-top: 20px;
-	margin-bottom: 10px
+	margin-bottom: 10px;
+	text-align: center;
 }
 
+
+
 h1 {
-	font-size: 24px;
+	flex: 1;
+	text-align: center;
+	font-size: 30px;
 	font-weight: 500;
 	padding: 0px;
-	margin: 0px;
-	margin-bottom: 10px
+	margin-bottom: 10px;
+	color: #545454;
 }

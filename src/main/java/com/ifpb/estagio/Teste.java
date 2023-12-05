@@ -38,7 +38,6 @@ public class Teste {
 		//INSERT
 //		Aluno aluno = new Aluno();
 //		aluno.setNome("Risalva");
-//		aluno.setMatricula(5);
 //		entityManager.getTransaction().begin();
 //		entityManager.persist(aluno);
 //		entityManager.getTransaction().commit();
