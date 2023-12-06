@@ -2,11 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <h:head>
 
 	<meta charset="UTF-8" />
-	<title>Cadastro de aluno</title>
+	<title>Cadastro de Orientador</title>
 
 	<h:outputStylesheet library="estilos" name="estilo.css" />
 
@@ -18,37 +19,54 @@
 			height="35" />
 	</header>
 	<div id="conteudo">
-		<h:form>
-			<h1>Cadastro de Aluno</h1>
-			<h:panelGrid columns="2">
-				<p:outputLabel value="Nome:" for="nome" />
-				<p:inputText id="nome" value="#{alunoBean.aluno.nome}" />
-				<p:outputLabel value="Curso:" for="curso" />
-				<p:inputText id="curso" value="#{alunoBean.aluno.curso}" />
-				<p:outputLabel />
-				<p>
-					<p:commandButton value="Voltar" action="#{gestaoAlunosBean.voltar}" />
-					<p:commandButton value="Enviar" action="#{alunoBean.adcionar}" />
-				</p>
-
-			</h:panelGrid>
-			<p:dataTable value="#{alunoBean.alunos}" var="a" border="1">
-				<p:column>
-					<p:outputLabel value="Nome" />
-				#{a.nome}
+		<h1>Cadastro de Orientador</h1>
+		<h:form id="form">
+			<p:growl autoUpdate="true" id="msgOrientador" />
+			<div class="inputs">
+				<h:panelGrid columns="2">
+					<p:outputLabel value="Orientador: " for="orientador" />
+					<p:inputText id="orientador" required="true" label="Orientador"
+						requiredMessage="Preencha os campos obrigatórios"
+						placeholder="Informe o nome do orientador" size="30"
+						value="#{orientadorBean.orientador.nome}" />
+					<p:outputLabel value="Departamento:" for="departamento" />
+					<p:inputText id="departamento" required="true" label="Departamento"
+						requiredMessage="Preencha os campos obrigatórios"
+						placeholder="Informe o departamento do orientador" size="30"
+						value="#{orientadorBean.orientador.departamento}" />
+					<p:outputLabel />
+					<div class="buttons">
+						<p:commandButton value="Voltar"
+							action="#{gestaoPaginasBean.voltar}" />
+						<p:commandButton value="Enviar" action="#{orientadorBean.adicionar}"
+							update="form tabelaOrientador" />
+					</div>
+				</h:panelGrid>
+			</div>
+			<p:dataTable value="#{orientadorBean.orientadores}" var="o" border="1"
+				id="tabelaOrientador" paginator="true" rows="5">
+				<p:column headerText="Nome">
+					<p:outputLabel value="#{o.nome}" />
 				</p:column>
-				<p:column>
-					<p:outputLabel value="Curso" />
-				#{a.curso}
+				<p:column headerText="Departamento">
+					<p:outputLabel value="#{o.departamento}" />
 				</p:column>
-				<p:column>
-					<h:button value="Editar"
-						outcome="EditarAluno.xhtml?parametro=#{a.nome}" />
+				<p:column headerText="Ações" width="25%">
+					<p:commandButton value="Editar" icon="ui-icon-document" action="#{orientadorBean.editar}"
+						update="@form" process="@this">
+						<f:setPropertyActionListener value="#{o}"
+							target="#{orientadorBean.orientador}" />
+					</p:commandButton>
+					<p:commandButton action="#{orientadorBean.excluir}" value="Deletar"
+						icon="ui-icon-trash" update="tabelaOrientador" process="@this">
+						<f:setPropertyActionListener value="#{o}"
+							target="#{orientadorBean.orientador}" />
+					</p:commandButton>
 				</p:column>
 			</p:dataTable>
 		</h:form>
 	</div>
-	<footer> Gerenciador de Estagios </footer>
+	<footer> Gerenciador de Estágios </footer>
 </h:body>
 
 </html>

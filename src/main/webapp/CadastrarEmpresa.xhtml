@@ -2,37 +2,75 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <h:head>
+
 	<meta charset="UTF-8" />
-	<title>Cadastro de aluno</title>
+	<title>Cadastro de Empresa</title>
+
 	<h:outputStylesheet library="estilos" name="estilo.css" />
+
 </h:head>
 
 <h:body>
 	<header>
-		<h:graphicImage library="estilos" name="logo.png" width="50" height="35" />
+		<h:graphicImage library="estilos" name="logo.png" width="50"
+			height="35" />
 	</header>
 	<div id="conteudo">
-		<h:form>
-			<h1>Cadastro de Empresa</h1>
-			<h:panelGrid columns="2">
-				<h:outputLabel value="Razão social" for="razaoSocial" />
-				<h:inputText id="razaoSocial" value="#{gestaoEmpresaBean.empresa.nome}" />
-
-				<h:outputLabel value="Endereço" for="endereco" />
-				<h:inputText id="endereco" value="#{gestaoEmpresaBean.empresa.endereco}" />
-
-				<h:outputLabel value="Setor" for="setor" />
-				<h:selectOneMenu id="setor" value="#{gestaoEmpresaBean.empresa.setor}">
-					<f:selectItem itemLabel="Selecione ..." />
-					<f:selectItems value="#{gestaoEmpresaBean.tiposEmpresa}" var="tipoEmpresa"
-						itemLabel="#{tipoEmpresa.descricao}" itemValue="#{tipoEmpresa}" />
-				</h:selectOneMenu>
-
-				<h:outputLabel />
-				<h:commandButton value="Salvar" action="#{gestaoEmpresaBean.salvar}" />
-			</h:panelGrid>
+		<h1>Cadastro de Empresa</h1>
+		<h:form id="form">
+			<p:growl autoUpdate="true" id="msgEmpresa" />
+			<div class="inputs">
+				<h:panelGrid columns="2">
+					<p:outputLabel value="Razão Social: " for="razaoSocial" />
+					<p:inputText id="razaoSocial" required="true" label="Razão Social"
+						requiredMessage="Preencha os campos obrigatórios"
+						placeholder="Informe a razão social da empresa" size="30"
+						value="#{empresaBean.empresa.nome}" />
+					<p:outputLabel value="Endereço:" for="endereco" />
+					<p:inputText id="endereco" required="true" label="Endereço"
+						requiredMessage="Preencha os campos obrigatórios"
+						placeholder="Informe o endereço da empresa" size="30"
+						value="#{empresaBean.empresa.endereco}" />
+					<p:outputLabel value="Setor:" for="setor" />
+					<p:inputText id="setor" label="Setor"
+						placeholder="Informe o setor da empresa" size="30"
+						value="#{empresaBean.empresa.setor}" />
+					<p:outputLabel />
+					<div class="buttons">
+						<p:commandButton value="Voltar"
+							action="#{gestaoPaginasBean.voltar}" />
+						<p:commandButton value="Enviar" action="#{empresaBean.adicionar}"
+							update="form tabelaEmpresa" />
+					</div>
+				</h:panelGrid>
+			</div>
+			<p:dataTable value="#{empresaBean.empresas}" var="e" border="1"
+				id="tabelaEmpresa" paginator="true" rows="5">
+				<p:column headerText="Razão Social">
+					<p:outputLabel value="#{e.nome}" />
+				</p:column>
+				<p:column headerText="Endereço">
+					<p:outputLabel value="#{e.endereco}" />
+				</p:column>
+				<p:column headerText="Setor">
+					<p:outputLabel value="#{e.setor}" />
+				</p:column>
+				<p:column headerText="Ações" width="25%">
+					<p:commandButton value="Editar" icon="ui-icon-document" action="#{empresaBean.editar}"
+						update="@form" process="@this">
+						<f:setPropertyActionListener value="#{e}"
+							target="#{empresaBean.empresa}" />
+					</p:commandButton>
+					<p:commandButton action="#{empresaBean.excluir}" value="Deletar"
+						icon="ui-icon-trash" update="tabelaEmpresa" process="@this">
+						<f:setPropertyActionListener value="#{e}"
+							target="#{empresaBean.empresa}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
 		</h:form>
 	</div>
 	<footer> Gerenciador de Estágios </footer>

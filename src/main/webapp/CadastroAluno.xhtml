@@ -37,7 +37,7 @@
 					<p:outputLabel />
 					<div class="buttons">
 						<p:commandButton value="Voltar"
-							action="#{gestaoAlunosBean.voltar}" />
+							action="#{gestaoPaginasBean.voltar}" />
 						<p:commandButton value="Enviar" action="#{alunoBean.adicionar}"
 							update="form tabela" />
 					</div>
@@ -53,9 +53,9 @@
 					<p:outputLabel value="#{a.curso}" />
 				</p:column>
 				<p:column headerText="Ações" width="25%">
-					<p:commandButton value="Editar" icon="ui-icon-document"
+					<p:commandButton value="Editar" icon="ui-icon-document" action="#{alunoBean.editar}"
 						update="@form" process="@this">
-						<f:setPropertyActionListener value="#a"
+						<f:setPropertyActionListener value="#{a}"
 							target="#{alunoBean.aluno}" />
 					</p:commandButton>
 					<p:commandButton action="#{alunoBean.excluir}" value="Deletar"

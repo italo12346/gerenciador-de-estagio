@@ -58,9 +58,13 @@ public class AlunoBean implements Serializable {
 		try {
 			service.remover(aluno);
 			carregar();
-			Message.info(aluno.getNome() + "Foi removido");
+			Message.info(aluno.getNome() + " Foi removido");
 		} catch (NegocioException e) {
 			Message.erro("Erro em Salvar");
 		}
 	}
-}
+	public void editar() {
+		Message.info("Pronto para Editar");
+	}
+	
+};
