@@ -58,9 +58,9 @@
 						<f:setPropertyActionListener value="#a"
 							target="#{alunoBean.aluno}" />
 					</p:commandButton>
-					<p:commandButton action="#{alunoBean.excluir}" value="Deletar" icon="ui-icon-trash"
-						update="tabela" process="@this">
-						<f:setPropertyActionListener value="#a"
+					<p:commandButton action="#{alunoBean.excluir}" value="Deletar"
+						icon="ui-icon-trash" update="tabela" process="@this">
+						<f:setPropertyActionListener value="#{a}"
 							target="#{alunoBean.aluno}" />
 					</p:commandButton>
 				</p:column>
