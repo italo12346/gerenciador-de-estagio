@@ -27,7 +27,8 @@
 				<p:inputText id="curso" value="#{alunoBean.aluno.curso}" />
 				<p:outputLabel />
 				<p class="buttons">
-					<p:commandButton value="Voltar" action="#{gestaoAlunosBean.voltar}" />
+					<p:commandButton value="Voltar"
+							action="#{gestaoPaginasBean.voltar}" immediate="true" />
 					<p:commandButton value="Enviar" action="#{alunoBean.adcionar}" />
 				</p>
 

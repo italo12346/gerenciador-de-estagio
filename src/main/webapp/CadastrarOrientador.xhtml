@@ -37,14 +37,16 @@
 					<p:outputLabel />
 					<div class="buttons">
 						<p:commandButton value="Voltar"
-							action="#{gestaoPaginasBean.voltar}" />
-						<p:commandButton value="Enviar" action="#{orientadorBean.adicionar}"
+							action="#{gestaoPaginasBean.voltar}" immediate="true" />
+
+						<p:commandButton value="Enviar"
+							action="#{orientadorBean.adicionar}"
 							update="form tabelaOrientador" />
 					</div>
 				</h:panelGrid>
 			</div>
-			<p:dataTable value="#{orientadorBean.orientadores}" var="o" border="1"
-				id="tabelaOrientador" paginator="true" rows="5">
+			<p:dataTable value="#{orientadorBean.orientadores}" var="o"
+				border="1" id="tabelaOrientador" paginator="true" rows="5">
 				<p:column headerText="Nome">
 					<p:outputLabel value="#{o.nome}" />
 				</p:column>
@@ -52,8 +54,8 @@
 					<p:outputLabel value="#{o.departamento}" />
 				</p:column>
 				<p:column headerText="Ações" width="25%">
-					<p:commandButton value="Editar" icon="ui-icon-document" action="#{orientadorBean.editar}"
-						update="@form" process="@this">
+					<p:commandButton value="Editar" icon="ui-icon-document"
+						action="#{orientadorBean.editar}" update="@form" process="@this">
 						<f:setPropertyActionListener value="#{o}"
 							target="#{orientadorBean.orientador}" />
 					</p:commandButton>
