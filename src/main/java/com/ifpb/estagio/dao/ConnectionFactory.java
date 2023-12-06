@@ -5,9 +5,12 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 public class ConnectionFactory {
-	public static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("BancoPU");
-	private static EntityManager entityManager = entityManagerFactory.createEntityManager();
-	public static EntityManager getEntityManager() {
-		return entityManager;
-	}
+    private static EntityManagerFactory entityManagerFactory;
+
+    public static EntityManager getEntityManager() {
+        if (entityManagerFactory == null) {
+            entityManagerFactory = Persistence.createEntityManagerFactory("BancoPU");
+        }
+        return entityManagerFactory.createEntityManager();
+    }
 }
