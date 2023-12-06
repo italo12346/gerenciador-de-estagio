@@ -6,15 +6,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "orientadores")
-public class Orientador {
+public class Orientador implements Serializable, Base {
+	private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     private String nome;
     private String departamento;
@@ -24,11 +27,11 @@ public class Orientador {
 
     // Getters e Setters
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

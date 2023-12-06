@@ -4,51 +4,38 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-
 	<meta charset="UTF-8" />
 	<title>Cadastro de aluno</title>
-
 	<h:outputStylesheet library="estilos" name="estilo.css" />
-
 </h:head>
 
 <h:body>
 	<header>
-		<h:graphicImage library="estilos" name="logo.png" width="50"
-			height="35" />
+		<h:graphicImage library="estilos" name="logo.png" width="50" height="35" />
 	</header>
 	<div id="conteudo">
 		<h:form>
-			<h1>Cadastro de Aluno</h1>
+			<h1>Cadastro de Empresa</h1>
 			<h:panelGrid columns="2">
-				<p:outputLabel value="Nome:" for="nome" />
-				<p:inputText id="nome" value="#{alunoBean.aluno.nome}" />
-				<p:outputLabel value="Curso:" for="curso" />
-				<p:inputText id="curso" value="#{alunoBean.aluno.curso}" />
-				<p:outputLabel />
-				<p>
-					<p:commandButton value="Voltar" action="#{gestaoAlunosBean.voltar}" />
-					<p:commandButton value="Enviar" action="#{alunoBean.adcionar}" />
-				</p>
+				<h:outputLabel value="Razão social" for="razaoSocial" />
+				<h:inputText id="razaoSocial" value="#{gestaoEmpresaBean.empresa.nome}" />
 
+				<h:outputLabel value="Endereço" for="endereco" />
+				<h:inputText id="endereco" value="#{gestaoEmpresaBean.empresa.endereco}" />
+
+				<h:outputLabel value="Setor" for="setor" />
+				<h:selectOneMenu id="setor" value="#{gestaoEmpresaBean.empresa.setor}">
+					<f:selectItem itemLabel="Selecione ..." />
+					<f:selectItems value="#{gestaoEmpresaBean.tiposEmpresa}" var="tipoEmpresa"
+						itemLabel="#{tipoEmpresa.descricao}" itemValue="#{tipoEmpresa}" />
+				</h:selectOneMenu>
+
+				<h:outputLabel />
+				<h:commandButton value="Salvar" action="#{gestaoEmpresaBean.salvar}" />
 			</h:panelGrid>
-			<p:dataTable value="#{alunoBean.alunos}" var="a" border="1">
-				<p:column>
-					<p:outputLabel value="Nome" />
-				#{a.nome}
-				</p:column>
-				<p:column>
-					<p:outputLabel value="Curso" />
-				#{a.curso}
-				</p:column>
-				<p:column>
-					<h:button value="Editar"
-						outcome="EditarAluno.xhtml?parametro=#{a.nome}" />
-				</p:column>
-			</p:dataTable>
 		</h:form>
 	</div>
-	<footer> Gerenciador de Estagios </footer>
+	<footer> Gerenciador de Estágios </footer>
 </h:body>
 
 </html>
