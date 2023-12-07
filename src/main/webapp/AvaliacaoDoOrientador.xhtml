@@ -2,14 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
-<h:head>
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
-	<meta charset="UTF-8" />
-	<title>Tempalte</title>
+<h:head>
+	<title>Questinario Avaliação do Orientador</title>
 
 	<h:outputStylesheet library="estilos" name="estilo.css" />
-
 </h:head>
 
 <h:body>
@@ -17,17 +16,9 @@
 		<h:graphicImage library="estilos" name="logo.png" width="50"
 			height="35" />
 	</header>
-<<<<<<< HEAD
 	<h:form id="form">
 		<h1>Questinario Avaliação do Orientador</h1>
 		<p:panelGrid columns="2" styleClass="centralizar-itens">
-			<h:outputLabel for="alunosMenu" value="Selecione um Aluno:" />
-			<h:selectOneMenu id="alunosMenu"
-				value="#{avaliacaoOrientadorBean.alunoSelecionado}">
-				<f:selectItems value="#{avaliacaoOrientadorBean.listAlunos}" var="a"
-					itemLabel="#{a.nome}" itemValue="#{a}" />
-
-			</h:selectOneMenu>
 			<p:outputLabel for="assiduidade" value="1. Assiduidade:" />
 			<p:selectOneMenu id="assiduidade"
 				value="#{avaliacaoOrientadorBean.avaliacao.assiduidade}">
@@ -76,8 +67,8 @@
 				immediate="true" />
 
 			<p:commandButton value="Enviar"
-				action="#{avaliacaoOrientadorBean.salvarAvaliacao}"
-				update="form tabela" />
+				action="#{avaliacaoOrientadorBean.salvarAvaliacao}" update="form tabela" />
+
 		</p:panelGrid>
 
 		<h:panelGrid columns="2">
@@ -104,29 +95,5 @@
 			</p:dataTable>
 		</h:panelGrid>
 	</h:form>
-=======
-	<div id="conteudo">
-		<h:form>
-			<h1>Tempalte</h1>
-			<h:panelGrid columns="2">
-				<p:outputLabel value="Avaliação de Orientador"/>
-					<p:selectOneRadio value="Proatividade">
-						<f:selectItem itemLabel="ruim"/>
-						<f:selectItem itemLabel="bom"/>
-						<f:selectItem itemLabel="regular"/>
-						<f:selectItem itemLabel="muito bom"/>
-						<p:ajax event ="click" update="input" process="@this"/>
-					</p:selectOneRadio>
-					<h:panelGroup id="input">
-						<p:inputMask mask="999.999.999-99" value="CPF" id="cpf"/>
-					</h:panelGroup>
-					<p:selectOneMenu value=""></p:selectOneMenu>
-					<h:commandLink value="Voltar" action="#{gestaoAlunosBean.voltar}" />
-			</h:panelGrid>
-		</h:form>
-	</div>
-	<footer> Gerenciador de Estagios </footer>
->>>>>>> parent of 9270848 (avaliação do Orientador)
 </h:body>
-
 </html>

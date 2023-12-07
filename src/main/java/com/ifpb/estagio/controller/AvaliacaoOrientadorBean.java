@@ -2,36 +2,19 @@ package com.ifpb.estagio.controller;
 
 import java.util.List;
 
-import javax.annotation.PostConstruct;
+import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
 
-import com.ifpb.estagio.model.Aluno;
 import com.ifpb.estagio.model.AvaliacaoDoOrientador;
-import com.ifpb.estagio.servic.AlunoService;
 import com.ifpb.estagio.servic.AvaliacaoOrientadorService;
 
-@Named
+@ManagedBean
 @SessionScoped
 public class AvaliacaoOrientadorBean {
 
 	private AvaliacaoOrientadorService avaliacaoService;
 	private AvaliacaoDoOrientador avaliacao;
 	private List<AvaliacaoDoOrientador> listaAvaliacoes;
-	@Inject
-	private AlunoService service;
-	private List<Aluno> listAlunos;	
-	
-	private Aluno alunoSelecionado;
-
-	public Aluno getAlunoSelecionado() {
-	    return alunoSelecionado;
-	}
-
-	public void setAlunoSelecionado(Aluno alunoSelecionado) {
-	    this.alunoSelecionado = alunoSelecionado;
-	}
 
 	public AvaliacaoOrientadorBean() {
 		this.avaliacaoService = new AvaliacaoOrientadorService();
@@ -44,7 +27,6 @@ public class AvaliacaoOrientadorBean {
 	}
 
 	public void salvarAvaliacao() {
-		avaliacao.setAluno(alunoSelecionado);	
 		avaliacaoService.salvarAvaliacao(avaliacao);
 		this.avaliacao = new AvaliacaoDoOrientador(); // Limpar os campos após salvar
 		atualizarListaAvaliacoes();
@@ -58,21 +40,9 @@ public class AvaliacaoOrientadorBean {
 	private void atualizarListaAvaliacoes() {
 		this.listaAvaliacoes = avaliacaoService.listarTodasAvaliacoes("SELECT a FROM AvaliacaoDoOrientador a");
 	}
-	@PostConstruct
-	public void carregarAlunos(){
-		listAlunos = service.todosOsAlunos();
-		System.out.println(listAlunos);
-	}
 
 	// Getters e Setters
 
-    public List<Aluno> getListAlunos() {
-        return listAlunos;
-    }
-
-    public void setListAlunos(List<Aluno> listAlunos) {
-        this.listAlunos = listAlunos;
-    }
 	public AvaliacaoDoOrientador getAvaliacao() {
 		return avaliacao;
 	}
