@@ -21,5 +21,6 @@ public class MessageBean implements Serializable {
 	public void erro() {
 		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Mensagem de erro",null);
 		FacesContext.getCurrentInstance().addMessage(null, message);
+		
 	}
 }

@@ -2,69 +2,109 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
-<h:head>
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
-	<meta charset="UTF-8" />
-	<title>Cadastro de aluno</title>
+<h:head>
+	<title>Listar</title>
 
 	<h:outputStylesheet library="estilos" name="estilo.css" />
-
 </h:head>
 
 <h:body>
-	<p:layout fullPage="true">
-		<p:layoutUnit position="north" style="border:none" size="60">
-			<header>
-				<h:graphicImage library="estilos" name="logo.png" width="50"
-					height="35" />
-			</header>
-		</p:layoutUnit>
-		<p:layoutUnit position="center">
-			<div id="conteudo">
-				<h:form>
-					<h1>Gerenciar Estagio</h1>
-					<h:panelGrid columns="2">
-						<p:outputLabel value="Nome:" for="nome" />
-						<p:inputText id="nome" value="#{alunoBean.aluno.nome}" />
-						<p:outputLabel value="Curso:" for="curso" />
-						<p:inputText id="curso" value="#{alunoBean.aluno.curso}" />
-						<p:outputLabel />
-						<div class="buttons">
-							<p:commandButton value="Voltar"
-								action="#{gestaoAlunosBean.voltar}" />
-							<p:commandButton value="Enviar" action="#{alunoBean.adicionar}" />
-						</div>
-					</h:panelGrid>
-					<p:dataTable value="#{alunoBean.alunos}" var="a" border="1">
-						<p:column>
-							<p:outputLabel value="Nome" />
-				#{a.nome}
-				</p:column>
-						<p:column>
-							<p:outputLabel value="Curso" />
-				#{a.curso}
-				</p:column>
-						<p:column>
-							<h:button value="Editar"
-								outcome="EditarAluno.xhtml?parametro=#{a.nome}" />
+	<header>
+		<h:graphicImage library="estilos" name="logo.png" width="50"
+			height="35" />
+	</header>
+	<h:form id="form">
+		<h1>LISTAGEM</h1>
+		<p:tabView>
+			<p:tab title="Alunos">
+				<h:panelGrid columns="2">
+					<p:dataTable value="#{alunoBean.alunos}" var="a" border="1"
+						id="tabela" paginator="true" rows="5">
+						<p:column headerText="Nome">
+							<p:outputLabel value="#{a.nome}" />
+						</p:column>
+						<p:column headerText="Curso">
+							<p:outputLabel value="#{a.curso}" />
+						</p:column>
+						<p:column headerText="Ações" width="25%">
+							<p:commandButton value="Editar" icon="ui-icon-document"
+								action="CadastroAluno?faces-redirect=true" update="@form"
+								process="@this">
+								<f:setPropertyActionListener value="#{a}"
+									target="#{alunoBean.aluno}" />
+							</p:commandButton>
+							<p:commandButton action="#{alunoBean.excluir}" value="Deletar"
+								icon="ui-icon-trash" update="tabela" process="@this">
+								<f:setPropertyActionListener value="#{a}"
+									target="#{alunoBean.aluno}" />
+							</p:commandButton>
 						</p:column>
 					</p:dataTable>
-				</h:form>
-			</div>
-		</p:layoutUnit>
-		<p:layoutUnit position="west">
-			<h:form>
-				<p:menu style="width:100%">
-					<p:menuitem value="Alunos"/>
-					<p:menuitem value="Orientadores" />
-					<p:menuitem value="Estagios" />
-					<p:menuitem value="Empresas" />
-				</p:menu>
-			</h:form>
-		</p:layoutUnit>
-	</p:layout>
-	<footer> Gerenciador de Estagios </footer>
-</h:body>
+				</h:panelGrid>
+			</p:tab>
 
+			<p:tab title="Orientadores">
+				<h:panelGrid columns="2">
+					<p:dataTable value="#{orientadorBean.orientadores}" var="o"
+						border="1" id="tabelaOrientador" paginator="true" rows="5">
+						<p:column headerText="Nome">
+							<p:outputLabel value="#{o.nome}" />
+						</p:column>
+						<p:column headerText="Departamento">
+							<p:outputLabel value="#{o.departamento}" />
+						</p:column>
+						<p:column headerText="Ações" width="25%">
+							<p:commandButton value="Editar" icon="ui-icon-document"
+								action="CadastrarOrientador?faces-redirect=true" update="@form"
+								process="@this">
+								<f:setPropertyActionListener value="#{o}"
+									target="#{orientadorBean.orientador}" />
+							</p:commandButton>
+							<p:commandButton action="#{orientadorBean.excluir}"
+								value="Deletar" icon="ui-icon-trash" update="tabelaOrientador"
+								process="@this">
+								<f:setPropertyActionListener value="#{o}"
+									target="#{orientadorBean.orientador}" />
+							</p:commandButton>
+						</p:column>
+					</p:dataTable>
+				</h:panelGrid>
+			</p:tab>
+
+			<p:tab title="Empresa">
+				<h:panelGrid columns="2">
+					<p:dataTable value="#{empresaBean.empresas}" var="e" border="1"
+						id="tabelaEmpresa" paginator="true" rows="5">
+						<p:column headerText="Razão Social">
+							<p:outputLabel value="#{e.nome}" />
+						</p:column>
+						<p:column headerText="Endereço">
+							<p:outputLabel value="#{e.endereco}" />
+						</p:column>
+						<p:column headerText="Setor">
+							<p:outputLabel value="#{e.setor}" />
+						</p:column>
+						<p:column headerText="Ações" width="25%">
+							<p:commandButton value="Editar" icon="ui-icon-document"
+								action="CadastrarOrientador?faces-redirect=true" update="@form" process="@this">
+								<f:setPropertyActionListener value="#{e}"
+									target="#{empresaBean.empresa}" />
+							</p:commandButton>
+							<p:commandButton action="#{empresaBean.excluir}" value="Deletar"
+								icon="ui-icon-trash" update="tabelaEmpresa" process="@this">
+								<f:setPropertyActionListener value="#{e}"
+									target="#{empresaBean.empresa}" />
+							</p:commandButton>
+						</p:column>
+					</p:dataTable>
+				</h:panelGrid>
+			</p:tab>
+		</p:tabView>
+		<p:commandButton value="Voltar" action="#{gestaoPaginasBean.voltar}"
+			immediate="true" />
+	</h:form>
+</h:body>
 </html>
