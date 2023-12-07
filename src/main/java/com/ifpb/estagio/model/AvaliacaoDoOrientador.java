@@ -7,8 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -33,10 +31,7 @@ public class AvaliacaoDoOrientador implements Serializable, Base {
 
     @Column(nullable = false)
     private String iniciativaSensoCritico;
-    																				
-    @ManyToOne
-    @JoinColumn(name = "aluno_id")
-    private Aluno aluno;
+
 	public Long getId() {
 		return id;
 	}
@@ -83,14 +78,6 @@ public class AvaliacaoDoOrientador implements Serializable, Base {
 
 	public void setIniciativaSensoCritico(String iniciativaSensoCritico) {
 		this.iniciativaSensoCritico = iniciativaSensoCritico;
-	}
-
-	public Aluno getAluno() {
-		return aluno;
-	}
-
-	public void setAluno(Aluno aluno) {
-		this.aluno = aluno;
 	}
 
 }

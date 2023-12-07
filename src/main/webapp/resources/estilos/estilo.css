@@ -47,12 +47,7 @@ footer {
 	margin-bottom: 10px;
 	text-align: center;
 }
-.centralizar-itens {
-	display: flex;
-    flex: 1;
-    justify-content: center;
-    text-align: center;
-}
+
 
 
 h1 {
