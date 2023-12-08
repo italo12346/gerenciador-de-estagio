@@ -40,7 +40,6 @@ public class DAO<T extends Base> implements Serializable {
             System.out.println(e);
         } finally {
             System.out.println("salvar ok");
-            // Não feche o EntityManager aqui
         }
     }
 

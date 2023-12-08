@@ -13,7 +13,8 @@
 
 <h:body>
 	<header>
-		<h:graphicImage library="estilos" name="logo.png" width="50" height="35" />
+		<h:graphicImage library="estilos" name="logo.png" width="50"
+			height="35" />
 	</header>
 	<div id="conteudo">
 		<h1>Cadastro de Estágio</h1>
@@ -26,6 +27,15 @@
 						requiredMessage="Preencha os campos obrigatórios"
 						placeholder="Informe o nome do estágio" size="30"
 						value="#{estagioBean.estagio.nome}" />
+
+					<p:outputLabel value="Empresa" for="empresa" />
+					<p:selectOneMenu id="empresa" required="true" label="Empresa"
+						requiredMessage="Selecione uma Empresa"
+						value="#{empresaBean.empresa}">
+						<f:selectItems value="#{empresaBean.empresas}" var="empresa"
+							itemLabel="#{empresa.nome}" itemValue="#{empresa}" />
+					</p:selectOneMenu>
+
 
 					<p:outputLabel value="Data de Início:" for="dataInicio" />
 					<p:calendar id="dataInicio" required="true" label="Data de Início"
@@ -40,26 +50,32 @@
 						value="#{estagioBean.estagio.dataFim}" pattern="dd/MM/yyyy" />
 
 					<p:outputLabel value="Carga Horária Total:" for="cargaHorariaTotal" />
-					<p:inputText id="cargaHorariaTotal" required="true" label="Carga Horária Total"
+					<p:inputText id="cargaHorariaTotal" required="true"
+						label="Carga Horária Total"
 						requiredMessage="Preencha os campos obrigatórios"
 						placeholder="Informe a carga horária total" size="30"
 						value="#{estagioBean.estagio.cargaHorariaTotal}" />
 
-					<p:outputLabel value="Status:" for="status" />
-					<p:inputText id="status" label="Status"
-						placeholder="Informe o status" size="30"
-						value="#{estagioBean.estagio.status}" />
+					<p:outputLabel value="Status" for="status" />
+					<p:selectOneMenu id="status" required="true" label="Status"
+						requiredMessage="Selecione um Status"
+						value="#{estagioBean.estagio.status}">
+						<f:selectItem itemLabel="Em Andamento" itemValue="Em Andamento" />
+						<f:selectItem itemLabel="Finalizado" itemValue="Finalizado" />
+					</p:selectOneMenu>
 
 					<p:outputLabel />
 					<div class="buttons">
-						<p:commandButton value="Voltar" action="#{gestaoPaginasBean.voltar}" immediate="true" />
-						<p:commandButton value="Enviar" action="#{estagioBean.salvar}" update="form tabelaEstagio" />
+						<p:commandButton value="Voltar"
+							action="#{gestaoPaginasBean.voltar}" immediate="true" />
+						<p:commandButton value="Enviar" action="#{estagioBean.salvar}"
+							update="form tabelaEstagio" />
 					</div>
 				</h:panelGrid>
 			</div>
-			<p:dataTable value="#{estagioBean.estagios}" var="est" border="1" id="tabelaEstagio" paginator="true"
-				rows="5">
-				<p:column headerText="Nome">
+			<p:dataTable value="#{estagioBean.estagios}" var="est" border="1"
+				id="tabelaEstagio" paginator="true" rows="5" paginatorPosition="bottom">
+				<p:column headerText="Nome" sortBy="#{est.nome}">
 					<p:outputLabel value="#{est.nome}" />
 				</p:column>
 				<p:column headerText="Data de Início">
@@ -78,14 +94,22 @@
 				<p:column headerText="Status">
 					<p:outputLabel value="#{est.status}" />
 				</p:column>
+
+				<p:column headerText="Empresa">
+					<p:outputLabel value="#{est.empresa.nome}" />
+				</p:column>
 				<p:column headerText="Ações" width="25%">
-					<p:commandButton value="Editar" icon="ui-icon-document" action="#{estagioBean.editar}" update="@form"
-						process="@this">
-						<f:setPropertyActionListener value="#{est}" target="#{estagioBean.estagio}" />
+					<p:commandButton value="Editar" icon="ui-icon-document"
+						action="#{estagioBean.editar}" update="@form" process="@this">
+						<f:setPropertyActionListener value="#{est}"
+							target="#{estagioBean.estagio}" />
 					</p:commandButton>
-					<p:commandButton action="#{estagioBean.excluir}" value="Deletar" icon="ui-icon-trash"
-						update="tabelaEstagio" process="@this">
-						<f:setPropertyActionListener value="#{est}" target="#{estagioBean.estagio}" />
+					<p:commandButton action="#{estagioBean.excluir}" value="Deletar"
+						icon="ui-icon-trash" update="tabelaEstagio" process="@this">
+						<f:setPropertyActionListener value="#{est}"
+							target="#{estagioBean.estagio}" />
+						<p:confirm header="Confirmação"
+							message="Tem certeza que deseja excluir?" icon="ui-icon-alert" />
 					</p:commandButton>
 				</p:column>
 			</p:dataTable>

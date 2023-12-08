@@ -18,7 +18,14 @@
 	</header>
 	<h:form id="form">
 		<h1>Questinario Avaliação do Orientador</h1>
-		<p:panelGrid columns="2" styleClass="centralizar-itens">
+		<h:panelGrid columns="2" styleClass="centralizar-itens">
+			<p:outputLabel value="Aluno:" for="aluno" />
+			<p:selectOneMenu id="aluno" required="true" label="Aluno"
+				requiredMessage="Selecione um aluno"
+				value="#{avaliacaoOrientadorBean.avaliacao.aluno}" style="width:75%">
+				<f:selectItems value="#{alunoBean.alunos}" var="aluno"
+					itemLabel="#{aluno.nome}" itemValue="#{aluno}" />
+			</p:selectOneMenu>
 			<p:outputLabel for="assiduidade" value="1. Assiduidade:" />
 			<p:selectOneMenu id="assiduidade"
 				value="#{avaliacaoOrientadorBean.avaliacao.assiduidade}">
@@ -67,9 +74,10 @@
 				immediate="true" />
 
 			<p:commandButton value="Enviar"
-				action="#{avaliacaoOrientadorBean.salvarAvaliacao}" update="form tabela" />
+				action="#{avaliacaoOrientadorBean.salvarAvaliacao}"
+				update="form tabela" />
 
-		</p:panelGrid>
+		</h:panelGrid>
 
 		<h:panelGrid columns="2">
 			<p:dataTable value="#{avaliacaoOrientadorBean.listaAvaliacoes}"

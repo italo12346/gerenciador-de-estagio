@@ -2,66 +2,112 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
 <h:head>
-
 	<meta charset="UTF-8" />
-	<title>Cadastro de aluno</title>
-
+	<title>Gerenciar Estagio</title>
 	<h:outputStylesheet library="estilos" name="estilo.css" />
-
 </h:head>
 
 <h:body>
-	<p:layout fullPage="true">
-		<p:layoutUnit position="north" style="border:none" size="60">
-			<header>
-				<h:graphicImage library="estilos" name="logo.png" width="50"
-					height="35" />
-			</header>
-		</p:layoutUnit>
-		<p:layoutUnit position="center">
-			<div id="conteudo">
-				<h:form>
-					<h1>Gerenciar Estagio</h1>
-					<h:panelGrid columns="2">
-						<p:outputLabel value="Nome:" for="nome" />
-						<p:inputText id="nome" value="#{alunoBean.aluno.nome}" />
-						<p:outputLabel value="Curso:" for="curso" />
-						<p:inputText id="curso" value="#{alunoBean.aluno.curso}" />
-						<p:outputLabel />
-						<div class="buttons">
-							<p:commandButton value="Voltar"
+	<header>
+		<h:graphicImage library="estilos" name="logo.png" width="50"
+			height="35" />
+	</header>
+	<div id="conteudo">
+		<h1>Gerenciar Estagio</h1>
+		<h:form id="form">
+			<p:growl autoUpdate="true" id="msgEstagio" />
+			<div class="inputs">
+				<h:panelGrid columns="2">
+					<p:outputLabel value="Selecione o Estágio:"
+						for="estagioSelecionado" />
+					<p:selectOneMenu id="estagioSelecionado" label="Estágio"
+						style="width:80%" value="#{estagioBean.estagio}">
+						<f:selectItems value="#{estagioBean.estagios}" var="estagio"
+							itemLabel="#{estagio.nome}" itemValue="#{estagio}" />
+					</p:selectOneMenu>
+
+					<p:outputLabel value="Aluno:" for="aluno" />
+					<p:selectOneMenu id="aluno" required="true" label="Aluno"
+						style="width:80%" requiredMessage="Selecione um aluno"
+						value="#{estagioBean.estagio.aluno}">
+						<f:selectItems value="#{alunoBean.alunos}" var="aluno"
+							itemLabel="#{aluno.nome}" itemValue="#{aluno}" />
+					</p:selectOneMenu>
+
+					<p:outputLabel value="Orientador:" for="orientador" />
+					<p:selectOneMenu id="orientador" required="true" label="Orientador"
+						style="width:80%" requiredMessage="Selecione um orientador"
+						value="#{estagioBean.estagio.orientador}">
+						<f:selectItems value="#{orientadorBean.orientadores}"
+							var="orientador" itemLabel="#{orientador.nome}"
+							itemValue="#{orientador}" />
+					</p:selectOneMenu>
+
+					<p:outputLabel value="Status" for="status" />
+					<p:selectOneMenu id="status" required="true" label="Status"
+						requiredMessage="Selecione um Status"
+						value="#{estagioBean.estagio.status}">
+						<f:selectItem itemLabel="Em Andamento" itemValue="Em Andamento" />
+						<f:selectItem itemLabel="Finalizado" itemValue="Finalizado" />
+					</p:selectOneMenu>
+					<p:outputLabel />
+					<div class="buttons">
+						<p:commandButton value="Voltar"
 							action="#{gestaoPaginasBean.voltar}" immediate="true" />
-							<p:commandButton value="Enviar" action="#{alunoBean.adcionar}" />
-						</div>
-					</h:panelGrid>
-					<p:dataTable value="#{alunoBean.alunos}" var="a" border="1">
-						<p:column>
-							<p:outputLabel value="Nome" />
-				#{a.nome}
-				</p:column>
-						<p:column>
-							<p:outputLabel value="Curso" />
-				#{a.curso}
-				</p:column>
-						<p:column>
-							<h:button value="Editar"
-								outcome="EditarAluno.xhtml?parametro=#{a.nome}" />
-						</p:column>
-					</p:dataTable>
-				</h:form>
+						<p:commandButton value="Salvar" action="#{estagioBean.salvar}"
+							update="form msgEstagio" />
+					</div>
+				</h:panelGrid>
 			</div>
-		</p:layoutUnit>
-		<p:layoutUnit position="west">
-			<h:form>
-				<p:menu>
-					<p:menuitem value="Cadastrar" />
-				</p:menu>
-			</h:form>
-		</p:layoutUnit>
-	</p:layout>
-	<footer> Gerenciador de Estagios </footer>
+			<p:dataTable value="#{estagioBean.estagios}" var="est" border="1"
+				id="tabelaEstagio" paginator="true" rows="5" paginatorPosition="bottom">
+				<p:column headerText="Nome">
+					<p:outputLabel value="#{est.nome}" />
+				</p:column>
+				<p:column headerText="Data de Início">
+					<p:outputLabel value="#{est.dataInicio}">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</p:outputLabel>
+				</p:column>
+				<p:column headerText="Data de Fim">
+					<p:outputLabel value="#{est.dataFim}">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</p:outputLabel>
+				</p:column>
+				<p:column headerText="Carga Horária Total">
+					<p:outputLabel value="#{est.cargaHorariaTotal}" />
+				</p:column>
+				<p:column headerText="Status">
+					<p:outputLabel value="#{est.status}" />
+				</p:column>
+				<p:column headerText="Aluno">
+					<p:outputLabel value="#{est.aluno.nome}" />
+				</p:column>
+				<p:column headerText="Orientador">
+					<p:outputLabel value="#{est.orientador.nome}" />
+				</p:column>
+				<p:column headerText="Ações" width="10%">
+					<p:commandButton icon="ui-icon-pencil" title="Editar"
+						action="#{estagioBean.editar}" update="@form" process="@this">
+						<f:setPropertyActionListener value="#{est}"
+							target="#{estagioBean.estagio}" />
+					</p:commandButton>
+					<p:commandButton action="#{estagioBean.excluir}" title="Deletar"
+						icon="ui-icon-trash" update="tabelaEstagio" process="@this">
+						<f:setPropertyActionListener value="#{est}"
+							target="#{estagioBean.estagio}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+			<p:commandButton value="Ir para Listar Informações" immediate="true"
+				action="Listar?faces-redirect=true" />
+		</h:form>
+	</div>
+	<footer>Gerenciador de Estágios</footer>
 </h:body>
 
 </html>

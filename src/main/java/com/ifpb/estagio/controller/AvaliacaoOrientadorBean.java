@@ -1,5 +1,6 @@
 package com.ifpb.estagio.controller;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -10,8 +11,9 @@ import com.ifpb.estagio.servic.AvaliacaoOrientadorService;
 
 @ManagedBean
 @SessionScoped
-public class AvaliacaoOrientadorBean {
+public class AvaliacaoOrientadorBean implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private AvaliacaoOrientadorService avaliacaoService;
 	private AvaliacaoDoOrientador avaliacao;
 	private List<AvaliacaoDoOrientador> listaAvaliacoes;

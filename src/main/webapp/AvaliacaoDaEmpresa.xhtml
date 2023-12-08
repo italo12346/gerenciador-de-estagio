@@ -1,29 +1,107 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
-<h:head>
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
-	<meta charset="UTF-8" />
-	<title>Tempalte</title>
+<h:head>
+	<title>Questinario Avaliação do Orientador</title>
 
 	<h:outputStylesheet library="estilos" name="estilo.css" />
-
 </h:head>
 
 <h:body>
 	<header>
-		<h:graphicImage library="estilos" name="logo.png" width="50" height="35"/>
+		<h:graphicImage library="estilos" name="logo.png" width="50"
+			height="35" />
 	</header>
-	<div id="conteudo">
-		<h:form>
-		<h1>Tempalte</h1>
-			<h:panelGrid columns="2">
-				
-			</h:panelGrid>
-		</h:form>
-	</div>
-	<footer> Gerenciador de Estagios </footer>
-</h:body>
+	<h:form id="form">
+		<h1>Questinario Avaliação do Orientador</h1>
+		<h:panelGrid columns="2" styleClass="centralizar-itens">
+			<p:outputLabel value="Aluno:" for="aluno" />
+			<p:selectOneMenu id="aluno" required="true" label="Aluno"
+				requiredMessage="Selecione um aluno"
+				value="#{avaliacaoOrientadorBean.avaliacao.aluno}" style="width:75%">
+				<f:selectItems value="#{alunoBean.alunos}" var="aluno"
+					itemLabel="#{aluno.nome}" itemValue="#{aluno}" />
+			</p:selectOneMenu>
+			<p:outputLabel for="assiduidade" value="1. Assiduidade:" />
+			<p:selectOneMenu id="assiduidade"
+				value="#{avaliacaoOrientadorBean.avaliacao.assiduidade}">
+				<f:selectItem itemLabel="Insuficiente" itemValue="Insuficiente" />
+				<f:selectItem itemLabel="Regular" itemValue="Regular" />
+				<f:selectItem itemLabel="Bom" itemValue="Bom" />
+				<f:selectItem itemLabel="Muito Bom" itemValue="Muito Bom" />
+			</p:selectOneMenu>
 
+			<p:outputLabel for="disciplina" value="2. Disciplina:" />
+			<p:selectOneMenu id="disciplina"
+				value="#{avaliacaoOrientadorBean.avaliacao.disciplina}">
+				<f:selectItem itemLabel="Insuficiente" itemValue="Insuficiente" />
+				<f:selectItem itemLabel="Regular" itemValue="Regular" />
+				<f:selectItem itemLabel="Bom" itemValue="Bom" />
+				<f:selectItem itemLabel="Muito Bom" itemValue="Muito Bom" />
+			</p:selectOneMenu>
+
+			<p:outputLabel for="sociabilidade" value="3. Sociabilidade:" />
+			<p:selectOneMenu id="sociabilidade"
+				value="#{avaliacaoOrientadorBean.avaliacao.sociabilidade}">
+				<f:selectItem itemLabel="Insuficiente" itemValue="Insuficiente" />
+				<f:selectItem itemLabel="Regular" itemValue="Regular" />
+				<f:selectItem itemLabel="Bom" itemValue="Bom" />
+				<f:selectItem itemLabel="Muito Bom" itemValue="Muito Bom" />
+			</p:selectOneMenu>
+
+			<p:outputLabel for="responsabilidade" value="4. Responsabilidade:" />
+			<p:selectOneMenu id="responsabilidade"
+				value="#{avaliacaoOrientadorBean.avaliacao.responsabilidade}">
+				<f:selectItem itemLabel="Insuficiente" itemValue="Insuficiente" />
+				<f:selectItem itemLabel="Regular" itemValue="Regular" />
+				<f:selectItem itemLabel="Bom" itemValue="Bom" />
+				<f:selectItem itemLabel="Muito Bom" itemValue="Muito Bom" />
+			</p:selectOneMenu>
+
+			<p:outputLabel for="iniciativa" value="5. Iniciativa, senso crítico:" />
+			<p:selectOneMenu id="iniciativa"
+				value="#{avaliacaoOrientadorBean.avaliacao.iniciativaSensoCritico}">
+				<f:selectItem itemLabel="Insuficiente" itemValue="Insuficiente" />
+				<f:selectItem itemLabel="Regular" itemValue="Regular" />
+				<f:selectItem itemLabel="Bom" itemValue="Bom" />
+				<f:selectItem itemLabel="Muito Bom" itemValue="Muito Bom" />
+			</p:selectOneMenu>
+			<p:commandButton value="Voltar" action="#{gestaoPaginasBean.voltar}"
+				immediate="true" />
+
+			<p:commandButton value="Enviar"
+				action="#{avaliacaoOrientadorBean.salvarAvaliacao}"
+				update="form tabela" />
+
+		</h:panelGrid>
+
+		<h:panelGrid columns="2">
+			<p:dataTable value="#{avaliacaoOrientadorBean.listaAvaliacoes}"
+				var="o" border="1" id="tabela" paginator="true" rows="5">
+				<p:column headerText="Id" width="15">
+					<p:outputLabel value="#{o.id}" />
+				</p:column>
+				<p:column headerText="Assiduidade">
+					<p:outputLabel value="#{o.assiduidade}" />
+				</p:column>
+				<p:column headerText="Disciplina">
+					<p:outputLabel value="#{o.disciplina}" />
+				</p:column>
+				<p:column headerText="Sociabilidade">
+					<p:outputLabel value="#{o.sociabilidade}" />
+				</p:column>
+				<p:column headerText="Responsabiliadade">
+					<p:outputLabel value="#{o.responsabilidade}" />
+				</p:column>
+				<p:column headerText="Iniciativa / Senso critico">
+					<p:outputLabel value="#{o.iniciativaSensoCritico}" />
+				</p:column>
+			</p:dataTable>
+		</h:panelGrid>
+	</h:form>
+</h:body>
 </html>
