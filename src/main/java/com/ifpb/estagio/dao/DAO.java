@@ -17,6 +17,7 @@ public class DAO<T extends Base> implements Serializable {
 
 	public T buscarPorId(Class<T> clazz, Long id) {
 		try {
+			System.out.println(id);
 			return manager.find(clazz, id);
 		} finally {
 			System.out.println("busca ok");

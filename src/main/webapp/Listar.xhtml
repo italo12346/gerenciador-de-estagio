@@ -12,26 +12,19 @@
 
 <h:body>
 	<header>
-		<h:graphicImage library="estilos" name="logo.png" width="50" height="35" />
+		<h:graphicImage library="estilos" name="logo.png" width="50"
+			height="35" />
 	</header>
 
 	<h:form id="form">
 		<h1>LISTAGEM</h1>
-		
-		<p:toolbar>
-			<f:facet name="right">
-				<p:inputText placeholder="Pesquise aqui" value="#{pesquisaBean.termoPesquisa}" />
-				<p:commandButton value="Pesquisar" icon="fa fa fa-search" action="#{pesquisaBean.pesquisar}" update="tab"/>
-				<span class="ui-separator">
-					<span class="ui-icon ui-icon-grip-dotted-vertical" />
-				</span>
-			</f:facet>
-		</p:toolbar>
+
 		<p:tabView id="tab">
 			<p:tab title="Alunos">
 				<h:panelGrid columns="2">
 					<p:dataTable value="#{alunoBean.alunos}" var="a" border="1"
-						id="tabelaAluno" paginator="true" rows="5" paginatorPosition="bottom">
+						id="tabelaAluno" paginator="true" rows="5"
+						paginatorPosition="bottom">
 						<p:column headerText="Nome">
 							<p:outputLabel value="#{a.nome}" />
 						</p:column>
@@ -113,6 +106,54 @@
 						</p:column>
 					</p:dataTable>
 				</h:panelGrid>
+			</p:tab>
+			<p:tab title="Estagios">
+				<p:dataTable value="#{estagioBean.estagios}" var="est" border="1"
+					id="tabelaEstagio" paginator="true" rows="5"
+					paginatorPosition="bottom">
+					<p:column headerText="Nome" sortBy="#{est.nome}">
+						<p:outputLabel value="#{est.nome}" />
+					</p:column>
+					<p:column headerText="Data de Início">
+						<p:outputLabel value="#{est.dataInicio}">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</p:outputLabel>
+					</p:column>
+					<p:column headerText="Data de Fim">
+						<p:outputLabel value="#{est.dataFim}">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</p:outputLabel>
+					</p:column>
+					<p:column headerText="Carga Horária Total">
+						<p:outputLabel value="#{est.cargaHorariaTotal}" />
+					</p:column>
+					<p:column headerText="Status">
+						<p:outputLabel value="#{est.status}" />
+					</p:column>
+
+					<p:column headerText="Empresa">
+						<p:outputLabel value="#{est.empresa.nome}" />
+					</p:column>
+					<p:column headerText="Aluno">
+						<p:outputLabel value="#{est.aluno.nome}" />
+					</p:column>
+						<p:column headerText="Orientador">
+						<p:outputLabel value="#{est.orientador.nome}" />
+					</p:column>
+					<p:column headerText="Ações" width="25%">
+						<p:commandButton value="Editar" icon="ui-icon-document"
+								action="CadastrarEstagio?faces-redirect=true" update="@form"
+								process="@this">
+								<f:setPropertyActionListener value="#{est}"
+									target="#{estagioBean.estagio}" />
+							</p:commandButton>
+						<p:commandButton action="#{estagioBean.excluir}" value="Deletar"
+							icon="ui-icon-trash" update="tabelaEstagio" process="@this">
+							<f:setPropertyActionListener value="#{est}"
+								target="#{estagioBean.estagio}" />
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
 			</p:tab>
 		</p:tabView>
 		<p:commandButton value="Voltar" action="#{gestaoPaginasBean.voltar}"

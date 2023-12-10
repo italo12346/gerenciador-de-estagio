@@ -4,14 +4,16 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import com.ifpb.estagio.dao.ConnectionFactory;
 import com.ifpb.estagio.dao.DAO;
 import com.ifpb.estagio.model.Empresa;
 import com.ifpb.estagio.utility.NegocioException;
-
+@Named
 public class EmpresaService implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -43,5 +45,14 @@ public class EmpresaService implements Serializable {
         Query query = manager.createQuery(jpql, Empresa.class);
         query.setParameter("termo", "%" + termo + "%");
         return query.getResultList();
+    }
+    
+    public Empresa buscarPorId(Long id) {
+        try {
+            return dao.buscarPorId(Empresa.class, id);
+        } catch (NoResultException e) {
+            // Tratar caso a empresa com o ID fornecido não seja encontrada
+            return null;
+        }
     }
 }
