@@ -20,27 +20,44 @@
 	<div id="conteudo">
 		<h:form>
 			<h1>Gerenciador de Paginas</h1>
-			<div class="inputs">
-				<p:panelGrid columns="2">
-					<p:commandLink value="Cadastro de Alunos"
-						action="CadastroAluno?faces-redirect=true" />
-					<p:commandLink value="Avaliação do Orientador"
-						action="AvaliacaoDoOrientador?faces-redirect=true" />
-					<p:commandLink value="Cadastro de Empresa"
-						action="CadastrarEmpresa?faces-redirect=true" />
-					<p:commandLink value="Avaliação da Empresa"
-						action="AvaliacaoDaEmpresa?faces-redirect=true" />
-					<p:commandLink value="Cadastro de Estagio"
-						action="CadastrarEstagio?faces-redirect=true" />
-					<p:commandLink value="Gerenciador de Estagios"
-						action="GerenciarEstagio?faces-redirect=true" />
-					<p:commandLink value="Cadastro de Orientador"
-						action="CadastrarOrientador?faces-redirect=true" />
-					<p:commandLink value="Listar Informações"
-						action="Listar?faces-redirect=true" />
-
-				</p:panelGrid>
-			</div>
+			<p:tabView id="tab">
+				<p:tab title="Paginas">
+					<div class="inputs">
+						<p:panelGrid columns="2">
+							<p:commandLink value="Cadastro de Alunos"
+								action="CadastroAluno?faces-redirect=true" />
+							<p:commandLink value="Avaliação do Orientador"
+								action="AvaliacaoDoOrientador?faces-redirect=true" />
+							<p:commandLink value="Cadastro de Empresa"
+								action="CadastrarEmpresa?faces-redirect=true" />
+							<p:commandLink value="Avaliação da Empresa"
+								action="AvaliacaoDaEmpresa?faces-redirect=true" />
+							<p:commandLink value="Cadastro de Estagio"
+								action="CadastrarEstagio?faces-redirect=true" />
+							<p:commandLink value="Gerenciador de Estagios"
+								action="GerenciarEstagio?faces-redirect=true" />
+							<p:commandLink value="Cadastro de Orientador"
+								action="CadastrarOrientador?faces-redirect=true" />
+							<p:commandLink value="Listar Informações"
+								action="Listar?faces-redirect=true" />
+						</p:panelGrid>
+					</div>
+				</p:tab>
+				<p:tab title="Pesquisas">
+					<div class="inputs">
+						<p:panelGrid columns="2">
+							<p:commandLink value="Pesquisa Aluno"
+								action="PesquisaAluno?faces-redirect=true" />
+							<p:commandLink value="Pesquisa Orientador"
+								action="AvaliacaoDoOrientador?faces-redirect=true" />
+							<p:commandLink value="Pesquisa Empresa"
+								action="PesquisarEmpresa?faces-redirect=true" />
+							<p:commandLink value="Pesquisar Estagio"
+								action="CadastrarEstagio?faces-redirect=true" />
+						</p:panelGrid>
+					</div>
+				</p:tab>
+			</p:tabView>
 		</h:form>
 	</div>
 	<footer> Gerenciador de Estagios </footer>

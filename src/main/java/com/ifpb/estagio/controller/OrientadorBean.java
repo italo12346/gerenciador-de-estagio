@@ -26,11 +26,18 @@ public class OrientadorBean implements Serializable {
     private OrientadorService service;
 
     private List<Orientador> orientadores;
+    
+    private String termoPesquisa;
 
-    @PostConstruct
-    public void carregar() {
-        orientadores = service.todosOsOrientadores();
+    public void pesquisar() {
+        orientadores = service.buscarOrientadorPorTermo(termoPesquisa);
     }
+    
+    @PostConstruct
+	 public void carregar() {
+       termoPesquisa = "";
+       orientadores = service.todosOsOrientadores();
+   }
 
     public Orientador getOrientador() {
         return orientador;
@@ -68,4 +75,13 @@ public class OrientadorBean implements Serializable {
     public void editar() {
         Message.info("Pronto para Editar");
     }
+
+	public String getTermoPesquisa() {
+		return termoPesquisa;
+	}
+
+	public void setTermoPesquisa(String termoPesquisa) {
+		this.termoPesquisa = termoPesquisa;
+	}
+    
 }

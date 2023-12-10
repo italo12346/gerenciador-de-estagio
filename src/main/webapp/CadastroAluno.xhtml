@@ -21,6 +21,15 @@
 	<div id="conteudo">
 		<h1>Cadastro de Aluno</h1>
 		<h:form id="form">
+		<p:toolbar>
+			<f:facet name="right">
+				<p:inputText placeholder="Pesquise aqui" value="#{pesquisaBean.termoPesquisa}" />
+				<p:commandButton value="Pesquisar" icon="fa fa fa-search" action="#{pesquisaBean.pesquisar}" update="tabela"/>
+				<span class="ui-separator">
+					<span class="ui-icon ui-icon-grip-dotted-vertical" />
+				</span>
+			</f:facet>
+		</p:toolbar>
 			<p:growl autoUpdate="true" id="msg" />
 			<div class="inputs">
 				<h:panelGrid columns="2">

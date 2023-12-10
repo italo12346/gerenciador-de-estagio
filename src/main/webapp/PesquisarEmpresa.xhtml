@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+	<meta charset="UTF-8" />
+	<title>Pesquisar Empresa</title>
+	<h:outputStylesheet library="estilos" name="estilo.css" />
+</h:head>
+
+<h:body>
+	<header>
+		<h:graphicImage library="estilos" name="logo.png" width="50"
+			height="35" />
+	</header>
+
+	<div id="conteudo">
+		<h:form id="form">
+			<h1>Pesquisar Empresa</h1>
+			<p:messages autoUpdate="true" />
+
+			<p:toolbar>
+				<f:facet name="right">
+					<p:inputText placeholder="Digite aqui um termo para pesquisa..."
+						size="30" value="#{empresaBean.termoPesquisa}" />
+
+					<p:commandButton value="Pesquisar" icon="fa fa-search"
+						actionListener="#{empresaBean.pesquisar}"
+						update="empresasDataTable" />
+
+					<span class="ui-separator"> <span
+						class="ui-icon ui-icon-grip-dotted-vertical" />
+					</span>
+					<p:commandButton value="Voltar"
+						action="#{gestaoPaginasBean.voltar}" immediate="true" />
+				</f:facet>
+			</p:toolbar>
+
+			<p:dataTable value="#{empresaBean.empresas}" var="e" border="1"
+				id="empresasDataTable" paginator="true" rows="5"
+				paginatorPosition="bottom">
+				<p:column headerText="Razão Social">
+					<p:outputLabel value="#{e.nome}" />
+				</p:column>
+				<p:column headerText="Endereço">
+					<p:outputLabel value="#{e.endereco}" />
+				</p:column>
+				<p:column headerText="Setor">
+					<p:outputLabel value="#{e.setor}" />
+				</p:column>
+				<p:column headerText="Ações" width="25%">
+						<p:commandButton value="Editar" icon="ui-icon-document"
+								action="CadastroEmpresa?faces-redirect=true" update="@form"
+								process="@this">
+						<f:setPropertyActionListener value="#{e}"
+							target="#{empresaBean.empresa}" />
+					</p:commandButton>
+					<p:commandButton action="#{empresaBean.excluir}" value="Deletar"
+						icon="ui-icon-trash" update="empresasDataTable" process="@this">
+						<f:setPropertyActionListener value="#{e}"
+							target="#{empresaBean.empresa}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+
+			<p:commandButton value="Ir para Listar Informações" immediate="true"
+				action="Listar?faces-redirect=true" />
+
+			<p:dialog header="Nova empresa" widgetVar="empresaDialogWidgetVar"
+				modal="true" resizable="false" closeOnEscape="true">
+				<p:commandButton value="Teste!" />
+			</p:dialog>
+		</h:form>
+	</div>
+
+	<footer> Gerenciador de Estágios </footer>
+</h:body>
+</html>

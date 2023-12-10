@@ -25,11 +25,18 @@ public class AlunoBean implements Serializable {
 	private AlunoService service;
 
 	private List<Aluno> alunos;
+	
+    private String termoPesquisa;
+    
+    public void pesquisar() {
+        alunos = service.buscarAlunoPorTermo(termoPesquisa);
+    }
 
 	@PostConstruct
-	public void carregar() {
-		alunos = service.todosOsAlunos();
-	}
+	 public void carregar() {
+        termoPesquisa = "";
+        alunos = service.todosOsAlunos();
+    }
 
 	public Aluno getAluno() {
 		return aluno;
@@ -66,5 +73,15 @@ public class AlunoBean implements Serializable {
 	public void editar() {
 		Message.info("Pronto para Editar");
 	}
+
+	public String getTermoPesquisa() {
+		return termoPesquisa;
+	}
+
+	public void setTermoPesquisa(String termoPesquisa) {
+		this.termoPesquisa = termoPesquisa;
+	}
 	
+	
+
 };

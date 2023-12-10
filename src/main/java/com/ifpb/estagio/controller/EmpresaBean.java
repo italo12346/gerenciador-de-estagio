@@ -26,9 +26,16 @@ public class EmpresaBean implements Serializable {
     private EmpresaService service;
 
     private List<Empresa> empresas;
+    
+    private String termoPesquisa;
+    
+    public void pesquisar() {
+        empresas = service.buscarEmpresasPorTermo(termoPesquisa);
+    }
 
     @PostConstruct
     public void carregar() {
+        termoPesquisa = "";
         empresas = service.todasAsEmpresas();
     }
 
@@ -68,4 +75,13 @@ public class EmpresaBean implements Serializable {
     public void editar() {
         Message.info("Pronto para Editar");
     }
+
+	public String getTermoPesquisa() {
+		return termoPesquisa;
+	}
+
+	public void setTermoPesquisa(String termoPesquisa) {
+		this.termoPesquisa = termoPesquisa;
+	}
+    
 }

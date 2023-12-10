@@ -7,22 +7,31 @@
 
 <h:head>
 	<title>Listar</title>
-
 	<h:outputStylesheet library="estilos" name="estilo.css" />
 </h:head>
 
 <h:body>
 	<header>
-		<h:graphicImage library="estilos" name="logo.png" width="50"
-			height="35" />
+		<h:graphicImage library="estilos" name="logo.png" width="50" height="35" />
 	</header>
+
 	<h:form id="form">
 		<h1>LISTAGEM</h1>
-		<p:tabView>
+		
+		<p:toolbar>
+			<f:facet name="right">
+				<p:inputText placeholder="Pesquise aqui" value="#{pesquisaBean.termoPesquisa}" />
+				<p:commandButton value="Pesquisar" icon="fa fa fa-search" action="#{pesquisaBean.pesquisar}" update="tab"/>
+				<span class="ui-separator">
+					<span class="ui-icon ui-icon-grip-dotted-vertical" />
+				</span>
+			</f:facet>
+		</p:toolbar>
+		<p:tabView id="tab">
 			<p:tab title="Alunos">
 				<h:panelGrid columns="2">
 					<p:dataTable value="#{alunoBean.alunos}" var="a" border="1"
-						id="tabela" paginator="true" rows="5" paginatorPosition="bottom">
+						id="tabelaAluno" paginator="true" rows="5" paginatorPosition="bottom">
 						<p:column headerText="Nome">
 							<p:outputLabel value="#{a.nome}" />
 						</p:column>
@@ -37,7 +46,7 @@
 									target="#{alunoBean.aluno}" />
 							</p:commandButton>
 							<p:commandButton action="#{alunoBean.excluir}" value="Deletar"
-								icon="ui-icon-trash" update="tabela" process="@this">
+								icon="ui-icon-trash" update="tabelaAluno" process="@this">
 								<f:setPropertyActionListener value="#{a}"
 									target="#{alunoBean.aluno}" />
 							</p:commandButton>
@@ -49,7 +58,8 @@
 			<p:tab title="Orientadores">
 				<h:panelGrid columns="2">
 					<p:dataTable value="#{orientadorBean.orientadores}" var="o"
-						border="1" id="tabelaOrientador" paginator="true" rows="5" paginatorPosition="bottom">
+						border="1" id="tabelaOrientador" paginator="true" rows="5"
+						paginatorPosition="bottom">
 						<p:column headerText="Nome">
 							<p:outputLabel value="#{o.nome}" />
 						</p:column>
@@ -77,7 +87,8 @@
 			<p:tab title="Empresa">
 				<h:panelGrid columns="2">
 					<p:dataTable value="#{empresaBean.empresas}" var="e" border="1"
-						id="tabelaEmpresa" paginator="true" rows="5" paginatorPosition="bottom">
+						id="tabelaEmpresa" paginator="true" rows="5"
+						paginatorPosition="bottom">
 						<p:column headerText="Razão Social">
 							<p:outputLabel value="#{e.nome}" />
 						</p:column>
@@ -89,7 +100,8 @@
 						</p:column>
 						<p:column headerText="Ações" width="25%">
 							<p:commandButton value="Editar" icon="ui-icon-document"
-								action="CadastrarOrientador?faces-redirect=true" update="@form" process="@this">
+								action="CadastrarOrientador?faces-redirect=true" update="@form"
+								process="@this">
 								<f:setPropertyActionListener value="#{e}"
 									target="#{empresaBean.empresa}" />
 							</p:commandButton>

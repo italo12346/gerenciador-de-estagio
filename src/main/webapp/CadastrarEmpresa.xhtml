@@ -47,8 +47,9 @@
 					</div>
 				</h:panelGrid>
 			</div>
-			<p:dataTable value="#{empresaBean.empresas}" var="e" border="1"
-				id="tabelaEmpresa" paginator="true" rows="5">
+			<p:dataTable
+				value="#{pesquisaEmpresaBean.pesquisaRealizada ? pesquisaEmpresaBean.listaEmpresa : empresaBean.empresas}"
+				var="e" border="1" id="tabelaEmpresa" paginator="true" rows="5">
 				<p:column headerText="Razão Social">
 					<p:outputLabel value="#{e.nome}" />
 				</p:column>
@@ -59,8 +60,8 @@
 					<p:outputLabel value="#{e.setor}" />
 				</p:column>
 				<p:column headerText="Ações" width="25%">
-					<p:commandButton value="Editar" icon="ui-icon-document" action="#{empresaBean.editar}"
-						update="@form" process="@this">
+					<p:commandButton value="Editar" icon="ui-icon-document"
+						action="#{empresaBean.editar}" update="@form" process="@this">
 						<f:setPropertyActionListener value="#{e}"
 							target="#{empresaBean.empresa}" />
 					</p:commandButton>

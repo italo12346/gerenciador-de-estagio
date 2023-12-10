@@ -10,6 +10,7 @@ import javax.persistence.TypedQuery;
 import org.hibernate.engine.spi.ExecuteUpdateResultCheckStyle;
 
 import com.ifpb.estagio.model.Aluno;
+import com.ifpb.estagio.model.Empresa;
 import com.ifpb.estagio.model.Estagio;
 import com.ifpb.estagio.model.Orientador;
 
@@ -109,7 +110,11 @@ public class Teste {
 //        estagio1.setAluno(aluno);
 //        estagio1.setOrientador(orientadorExistente);
 //        entityManager.persist(estagio1);
-
+    	
+    	  Empresa empresa = new Empresa();
+          empresa.setNome("Ads LTDA");
+          empresa.setEndereco("Rua Tal, Número Tal");
+          entityManager.persist(empresa);
 		entityManager.close();
 		entityManagerFactory.close();
 	}
