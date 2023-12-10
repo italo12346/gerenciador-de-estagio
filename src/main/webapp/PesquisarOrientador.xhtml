@@ -49,7 +49,7 @@
 
 				<p:column headerText="Ações" width="25%">
 					<p:commandButton value="Editar" icon="ui-icon-document"
-						action="CadastroOrientador?faces-redirect=true" update="@form"
+						action="CadastrarOrientador?faces-redirect=true" update="@form"
 						process="@this">
 						<f:setPropertyActionListener value="#{o}"
 							target="#{orientadorBean.orientadores}" />
@@ -64,11 +64,6 @@
 
 			<p:commandButton value="Ir para Listar Informações" immediate="true"
 				action="Listar?faces-redirect=true" />
-
-			<p:dialog header="Nova empresa" widgetVar="empresaDialogWidgetVar"
-				modal="true" resizable="false" closeOnEscape="true">
-				<p:commandButton value="Teste!" />
-			</p:dialog>
 		</h:form>
 	</div>
 
