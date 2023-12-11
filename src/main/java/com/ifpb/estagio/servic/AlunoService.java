@@ -10,7 +10,6 @@ import javax.persistence.Query;
 import com.ifpb.estagio.dao.ConnectionFactory;
 import com.ifpb.estagio.dao.DAO;
 import com.ifpb.estagio.model.Aluno;
-import com.ifpb.estagio.model.Empresa;
 import com.ifpb.estagio.utility.NegocioException;
 
 public class AlunoService implements Serializable {
@@ -37,6 +36,7 @@ public class AlunoService implements Serializable {
 		return dao.buscarTodos("select a from Aluno a order by a.nome");
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Aluno> buscarAlunoPorTermo(String termo) {
 		String jpql = "SELECT e FROM Aluno e WHERE LOWER(e.nome) LIKE LOWER(:termo) ORDER BY e.nome";
 		Query query = manager.createQuery(jpql, Aluno.class);

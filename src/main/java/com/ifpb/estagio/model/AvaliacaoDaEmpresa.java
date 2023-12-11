@@ -1,36 +1,43 @@
 package com.ifpb.estagio.model;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-import java.io.Serializable;
-
-import javax.persistence.*;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "avaliacao_da_empresa")
 public class AvaliacaoDaEmpresa implements Serializable, Base {
 	private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Column(nullable = false)
-    private String rendimentoDeTrabalho;
+	@Column(nullable = false)
+	private String rendimentoDeTrabalho;
 
-    @Column(nullable = false)
-    private String conhecimentos;
+	@Column(nullable = false)
+	private String conhecimentos;
 
-    @Column(nullable = false)
-    private String cumprimentoDasTarefas;
+	@Column(nullable = false)
+	private String cumprimentoDasTarefas;
 
-    @Column(nullable = false)
-    private String aprendizagem;
+	@Column(nullable = false)
+	private String aprendizagem;
 
-    @Column(nullable = false)
-    private String desempenho;
+	@Column(nullable = false)
+	private String desempenho;
+
+	@OneToOne
+	private Aluno aluno;
+
+	@JoinColumn(name = "aluno_id")
 
 	public Long getId() {
 		return id;
@@ -80,7 +87,6 @@ public class AvaliacaoDaEmpresa implements Serializable, Base {
 		this.desempenho = desempenho;
 	}
 
-    // Getters and setters
-    
-    
+	// Getters and setters
+
 }

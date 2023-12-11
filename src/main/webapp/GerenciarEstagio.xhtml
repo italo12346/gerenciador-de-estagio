@@ -25,14 +25,16 @@
 					<p:outputLabel value="Selecione o Estágio:"
 						for="estagioSelecionado" />
 					<p:selectOneMenu id="estagioSelecionado" label="Estágio"
-						style="width:80%" value="#{estagioBean.estagio}">
+						converter="omnifaces.SelectItemsConverter" style="width:80%"
+						value="#{estagioBean.estagio}">
 						<f:selectItems value="#{estagioBean.estagios}" var="estagio"
 							itemLabel="#{estagio.nome}" itemValue="#{estagio}" />
 					</p:selectOneMenu>
 
 					<p:outputLabel value="Aluno:" for="aluno" />
 					<p:selectOneMenu id="aluno" required="true" label="Aluno"
-						style="width:80%" requiredMessage="Selecione um aluno"
+						converter="omnifaces.SelectItemsConverter" style="width:80%"
+						requiredMessage="Selecione um aluno"
 						value="#{estagioBean.estagio.aluno}">
 						<f:selectItems value="#{alunoBean.alunos}" var="aluno"
 							itemLabel="#{aluno.nome}" itemValue="#{aluno}" />
@@ -40,7 +42,8 @@
 
 					<p:outputLabel value="Orientador:" for="orientador" />
 					<p:selectOneMenu id="orientador" required="true" label="Orientador"
-						style="width:80%" requiredMessage="Selecione um orientador"
+						converter="omnifaces.SelectItemsConverter" style="width:80%"
+						requiredMessage="Selecione um orientador"
 						value="#{estagioBean.estagio.orientador}">
 						<f:selectItems value="#{orientadorBean.orientadores}"
 							var="orientador" itemLabel="#{orientador.nome}"
@@ -49,6 +52,7 @@
 
 					<p:outputLabel value="Status" for="status" />
 					<p:selectOneMenu id="status" required="true" label="Status"
+						converter="omnifaces.SelectItemsConverter"
 						requiredMessage="Selecione um Status"
 						value="#{estagioBean.estagio.status}">
 						<f:selectItem itemLabel="Em Andamento" itemValue="Em Andamento" />
@@ -64,7 +68,8 @@
 				</h:panelGrid>
 			</div>
 			<p:dataTable value="#{estagioBean.estagios}" var="est" border="1"
-				id="tabelaEstagio" paginator="true" rows="5" paginatorPosition="bottom">
+				id="tabelaEstagio" paginator="true" rows="5"
+				paginatorPosition="bottom">
 				<p:column headerText="Nome">
 					<p:outputLabel value="#{est.nome}" />
 				</p:column>

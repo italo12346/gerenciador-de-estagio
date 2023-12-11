@@ -2,13 +2,13 @@ package com.ifpb.estagio.servic;
 
 import java.io.Serializable;
 import java.util.List;
+
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import com.ifpb.estagio.dao.ConnectionFactory;
 import com.ifpb.estagio.dao.DAO;
-import com.ifpb.estagio.model.Aluno;
 import com.ifpb.estagio.model.Orientador;
 import com.ifpb.estagio.utility.NegocioException;
 
@@ -37,6 +37,7 @@ public class OrientadorService implements Serializable {
         return dao.buscarTodos("select o from Orientador o order by o.nome");
     }
 
+	@SuppressWarnings("unchecked")
 	public List<Orientador> buscarOrientadorPorTermo(String termo) {
 		String jpql = "SELECT e FROM Orientador e WHERE LOWER(e.nome) LIKE LOWER(:termo) ORDER BY e.nome";
 		Query query = manager.createQuery(jpql, Orientador.class);

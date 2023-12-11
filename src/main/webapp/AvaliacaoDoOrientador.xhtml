@@ -19,13 +19,26 @@
 	<h:form id="form">
 		<h1>Questinario Avaliação do Orientador</h1>
 		<h:panelGrid columns="2" styleClass="centralizar-itens">
-			<p:outputLabel value="Aluno:" for="aluno" />
+			<p:outputLabel value="Selecione o Orientador: " for="orientador" />
+			<p:selectOneMenu id="orientador" required="true" label="Orientador"
+				converter="omnifaces.SelectItemsConverter"
+				requiredMessage="Selecione um Orientador"
+				value="#{avaliacaoOrientadorBean.avaliacao.orientador}"
+				style="width:75%">
+				<f:selectItems value="#{orientadorBean.orientadores}"
+					var="orientador" itemLabel="#{orientador.nome}"
+					itemValue="#{orientador}" />
+			</p:selectOneMenu>
+
+			<p:outputLabel value="Selecione um aluno para avaliar: " for="aluno" />
 			<p:selectOneMenu id="aluno" required="true" label="Aluno"
-				requiredMessage="Selecione um aluno"
+				converter="omnifaces.SelectItemsConverter"
+				requiredMessage="Selecione um aluno para avaliar"
 				value="#{avaliacaoOrientadorBean.avaliacao.aluno}" style="width:75%">
 				<f:selectItems value="#{alunoBean.alunos}" var="aluno"
 					itemLabel="#{aluno.nome}" itemValue="#{aluno}" />
 			</p:selectOneMenu>
+
 			<p:outputLabel for="assiduidade" value="1. Assiduidade:" />
 			<p:selectOneMenu id="assiduidade"
 				value="#{avaliacaoOrientadorBean.avaliacao.assiduidade}">
@@ -78,27 +91,30 @@
 				update="form tabela" />
 
 		</h:panelGrid>
-
 		<h:panelGrid columns="2">
 			<p:dataTable value="#{avaliacaoOrientadorBean.listaAvaliacoes}"
-				var="o" border="1" id="tabela" paginator="true" rows="5">
-				<p:column headerText="Id" width="15">
-					<p:outputLabel value="#{o.id}" />
+				paginatorPosition="bottom" var="avaliacao" border="1" id="tabela"
+				paginator="true" rows="5">
+				<p:column headerText="Orientador">
+					<p:outputLabel value="#{avaliacao.orientador.nome}" />
+				</p:column>
+				<p:column headerText="Aluno avaliado">
+					<p:outputLabel value="#{avaliacao.aluno.nome}" />
 				</p:column>
 				<p:column headerText="Assiduidade">
-					<p:outputLabel value="#{o.assiduidade}" />
+					<p:outputLabel value="#{avaliacao.assiduidade}" />
 				</p:column>
 				<p:column headerText="Disciplina">
-					<p:outputLabel value="#{o.disciplina}" />
+					<p:outputLabel value="#{avaliacao.disciplina}" />
 				</p:column>
 				<p:column headerText="Sociabilidade">
-					<p:outputLabel value="#{o.sociabilidade}" />
+					<p:outputLabel value="#{avaliacao.sociabilidade}" />
 				</p:column>
-				<p:column headerText="Responsabiliadade">
-					<p:outputLabel value="#{o.responsabilidade}" />
+				<p:column headerText="Responsabilidade">
+					<p:outputLabel value="#{avaliacao.responsabilidade}" />
 				</p:column>
-				<p:column headerText="Iniciativa / Senso critico">
-					<p:outputLabel value="#{o.iniciativaSensoCritico}" />
+				<p:column headerText="Iniciativa / Senso crítico">
+					<p:outputLabel value="#{avaliacao.iniciativaSensoCritico}" />
 				</p:column>
 			</p:dataTable>
 		</h:panelGrid>

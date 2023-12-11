@@ -40,7 +40,8 @@ public class EmpresaService implements Serializable {
         return dao.buscarTodos("SELECT e FROM Empresa e ORDER BY e.nome");
     }
     
-    public List<Empresa> buscarEmpresasPorTermo(String termo) {
+    @SuppressWarnings("unchecked")
+	public List<Empresa> buscarEmpresasPorTermo(String termo) {
         String jpql = "SELECT e FROM Empresa e WHERE LOWER(e.nome) LIKE LOWER(:termo) ORDER BY e.nome";
         Query query = manager.createQuery(jpql, Empresa.class);
         query.setParameter("termo", "%" + termo + "%");

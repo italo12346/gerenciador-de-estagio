@@ -8,35 +8,47 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "avaliacao_de_orientador")
 public class AvaliacaoDoOrientador implements Serializable, Base {
 	private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	@Column(nullable = false)
+	private String assiduidade;
 
-    @Column(nullable = false)
-    private String assiduidade;
+	@Column(nullable = false)
+	private String disciplina;
 
-    @Column(nullable = false)
-    private String disciplina;
+	@Column(nullable = false)
+	private String sociabilidade;
 
-    @Column(nullable = false)
-    private String sociabilidade;
+	@Column(nullable = false)
+	private String responsabilidade;
 
-    @Column(nullable = false)
-    private String responsabilidade;
+	@Column(nullable = false)
+	private String iniciativaSensoCritico;
 
-    @Column(nullable = false)
-    private String iniciativaSensoCritico;
-    																				
-    @ManyToOne
-    @JoinColumn(name = "aluno_id")
-    private Aluno aluno;
+	@OneToOne
+	@JoinColumn(name = "aluno_id")
+	private Aluno aluno;
+
+	@OneToOne
+	@JoinColumn(name = "orientador_id")
+	private Orientador orientador;
+
+	public Orientador getOrientador() {
+		return orientador;
+	}
+
+	public void setOrientador(Orientador orientador) {
+		this.orientador = orientador;
+	}
+
 	public Long getId() {
 		return id;
 	}

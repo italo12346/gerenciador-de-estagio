@@ -11,7 +11,7 @@ import javax.persistence.Query;
 import com.ifpb.estagio.model.AvaliacaoDoOrientador;
 
 @Dependent
-public class QuestionarioDAO implements Serializable {
+public class AvaliacaoDoOrientadorDAO implements Serializable {
     private static final long serialVersionUID = 1L;
     private static EntityManager manager = ConnectionFactory.getEntityManager();
 

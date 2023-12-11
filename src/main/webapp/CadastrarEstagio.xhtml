@@ -30,8 +30,9 @@
 
 					<p:outputLabel value="Empresa" for="empresa" />
 					<p:selectOneMenu id="empresa" required="true" label="Empresa"
+						converter="omnifaces.SelectItemsConverter"
 						requiredMessage="Selecione uma Empresa"
-						value="#{empresaBean.empresa}">
+						value="#{estagioBean.estagio.empresa}">
 						<f:selectItems value="#{empresaBean.empresas}" var="empresa"
 							itemLabel="#{empresa.nome}" itemValue="#{empresa}" />
 					</p:selectOneMenu>

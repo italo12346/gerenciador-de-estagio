@@ -44,7 +44,7 @@
 
 				</h:panelGrid>
 			</div>
-			<p:dataTable value="#{alunoBean.alunos}" var="a" border="1"
+			<p:dataTable value="#{alunoBean.alunos}" var="a" border="1" paginatorPosition="bottom"
 				id="tabela" paginator="true" rows="5">
 				<p:column headerText="Nome">
 					<p:outputLabel value="#{a.nome}" />
