@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.SessionScoped;
+import javax.faces.bean.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -14,7 +14,7 @@ import com.ifpb.estagio.utility.Message;
 import com.ifpb.estagio.utility.NegocioException;
 
 @Named("empresaBean")
-@SessionScoped
+@ApplicationScoped
 public class EmpresaBean implements Serializable {
 
     private static final long serialVersionUID = 1L;

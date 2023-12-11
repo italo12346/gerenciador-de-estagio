@@ -1,44 +1,66 @@
 package com.ifpb.estagio.converter;
 
-import javax.enterprise.context.Dependent;
+import java.util.logging.Logger;
+
+import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.inject.Inject;
+import javax.inject.Named;
+
 import com.ifpb.estagio.dao.DAO;
 import com.ifpb.estagio.model.Empresa;
 
+@Named  // Adicione a anotação Named
 @FacesConverter(forClass = Empresa.class)
-@Dependent
+@ViewScoped 
 public class EmpresaConverter implements Converter {
-	@Inject
-	private DAO<Empresa> dao;
+    private static final Logger logger = Logger.getLogger(EmpresaConverter.class.getName());
 
-	@Override
-	public Object getAsObject(FacesContext context, UIComponent component, String value) {
-		if (value == null || value.isEmpty()) {
-			return null;
-		}
+    @Inject
+    private DAO<Empresa> dao;
 
-		try {
-			Long id = Long.parseLong(value);
-			return dao.buscarPorId(Empresa.class, id);
-		} catch (NumberFormatException e) {
-			throw new IllegalArgumentException("Invalid value: " + value, e);
-		}
-	}
+    @Override
+    public Object getAsObject(FacesContext context, UIComponent component, String value) {
+        if (value == null || value.isEmpty()) {
+            return null;
+        }
 
-	@Override
-	public String getAsString(FacesContext context, UIComponent component, Object value) {
-		if (value == null) {
-			return "";
-		}
+        try {
+            Long id = Long.parseLong(value);
+            logger.info("ID para busca: " + id);
 
-		if (value instanceof Empresa) {
-			return String.valueOf(((Empresa) value).getId());
-		} else {
-			throw new IllegalArgumentException("Invalid object type: " + value.getClass());
-		}
-	}
+            if (dao == null) {
+                logger.warning("Injeção de dependência 'dao' é nula!");
+               
+                return null;
+            }
+
+            Empresa empresa = dao.buscarPorId(Empresa.class, id);
+            logger.info("Empresa encontrada: " + empresa);
+
+            return empresa;
+        } catch (NumberFormatException e) {
+            logger.severe("Erro ao converter para objeto. Valor inválido: " + value);
+            throw new IllegalArgumentException("Invalid value: " + value, e);
+        }
+    }
+
+    @Override
+    public String getAsString(FacesContext context, UIComponent component, Object value) {
+        if (value == null) {
+            return "";
+        }
+
+        if (value instanceof Empresa) {
+            String id = String.valueOf(((Empresa) value).getId());
+            logger.info("ID convertido para String: " + id);
+            return id;
+        } else {
+            logger.severe("Tipo de objeto inválido: " + value.getClass());
+            throw new IllegalArgumentException("Invalid object type: " + value.getClass());
+        }
+    }
 }

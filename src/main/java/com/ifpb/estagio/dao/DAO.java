@@ -3,26 +3,26 @@ package com.ifpb.estagio.dao;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.enterprise.context.Dependent;
+import javax.faces.bean.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
 import com.ifpb.estagio.model.Base;
 
-@Dependent
+@ApplicationScoped
 public class DAO<T extends Base> implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private static EntityManager manager = ConnectionFactory.getEntityManager();
 
 	public T buscarPorId(Class<T> clazz, Long id) {
-		try {
-			System.out.println(id);
-			return manager.find(clazz, id);
-		} finally {
-			System.out.println("busca ok");
-		}
-	}
+        String jpql = "SELECT e FROM " + clazz.getSimpleName() + " e WHERE e.id = :id";
+        Query query = manager.createQuery(jpql);
+        query.setParameter("id", id);
+
+        List<T> resultados = query.getResultList();
+        return resultados.isEmpty() ? null : resultados.get(0);
+    }
 
 	public void salvar(T t) {
 		EntityTransaction transaction = manager.getTransaction();
