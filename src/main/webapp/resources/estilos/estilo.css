@@ -28,6 +28,7 @@ header {
 	flex-direction: column;
 	margin-left: 25%;
 	margin-right: 25%;	
+	text-align: left;
 }
 .inputs{
 	display: flex;
@@ -51,7 +52,7 @@ footer {
 	display: flex;
     flex: 1;
     justify-content: center;
-    text-align: center;
+    text-align: left;
 }
 
 

@@ -13,22 +13,34 @@
 
 <h:body>
 	<header>
-		<h:graphicImage library="estilos" name="logo.png" width="50" height="35" />
+		<h:graphicImage library="estilos" name="logo.png" width="50"
+			height="35" />
 	</header>
 	<h:form id="form">
-		<h1>Questionário Avaliação do Estagiário</h1>
+		<h1>Avaliação Da Empresa</h1>
 		<h:panelGrid columns="2" styleClass="centralizar-itens">
-			<p:outputLabel value="Aluno:" for="aluno" />
+			<p:outputLabel value="Empresa:" for="empresa" />
+			<p:selectOneMenu id="empresa" required="true" label="Empresa"
+				converter="omnifaces.SelectItemsConverter"
+				requiredMessage="Selecione uma empresa"
+				value="#{avaliacaoEmpresaBean.avaliacao.empresa}" style="width:75%">
+				<f:selectItems value="#{empresaBean.empresas}" var="empresa"
+					itemLabel="#{empresa.nome}" itemValue="#{empresa}" />
+			</p:selectOneMenu>
+
+			<p:outputLabel value="Aluno avaliado:" for="aluno" />
 			<p:selectOneMenu id="aluno" required="true" label="Aluno"
+				converter="omnifaces.SelectItemsConverter"
 				requiredMessage="Selecione um aluno"
-				value="#{avaliacaoOrientadorBean.avaliacao.aluno}" style="width:75%">
+				value="#{avaliacaoEmpresaBean.avaliacao.aluno}" style="width:75%">
 				<f:selectItems value="#{alunoBean.alunos}" var="aluno"
 					itemLabel="#{aluno.nome}" itemValue="#{aluno}" />
 			</p:selectOneMenu>
 
-			<p:outputLabel for="rendimentoTrabalho" value="1. Rendimento de Trabalho:" />
+			<p:outputLabel for="rendimentoTrabalho"
+				value="1. Rendimento de Trabalho:" />
 			<p:selectOneMenu id="rendimentoTrabalho"
-				value="#{avaliacaoOrientadorBean.avaliacao.rendimentoTrabalho}">
+				value="#{avaliacaoEmpresaBean.avaliacao.rendimentoDeTrabalho}">
 				<f:selectItem itemLabel="Insuficiente" itemValue="Insuficiente" />
 				<f:selectItem itemLabel="Regular" itemValue="Regular" />
 				<f:selectItem itemLabel="Bom" itemValue="Bom" />
@@ -37,16 +49,17 @@
 
 			<p:outputLabel for="conhecimentos" value="2. Conhecimentos:" />
 			<p:selectOneMenu id="conhecimentos"
-				value="#{avaliacaoOrientadorBean.avaliacao.conhecimentos}">
+				value="#{avaliacaoEmpresaBean.avaliacao.conhecimentos}">
 				<f:selectItem itemLabel="Insuficiente" itemValue="Insuficiente" />
 				<f:selectItem itemLabel="Regular" itemValue="Regular" />
 				<f:selectItem itemLabel="Bom" itemValue="Bom" />
 				<f:selectItem itemLabel="Muito Bom" itemValue="Muito Bom" />
 			</p:selectOneMenu>
 
-			<p:outputLabel for="cumprimentoTarefas" value="3. Cumprimento das Tarefas:" />
+			<p:outputLabel for="cumprimentoTarefas"
+				value="3. Cumprimento das Tarefas:" />
 			<p:selectOneMenu id="cumprimentoTarefas"
-				value="#{avaliacaoOrientadorBean.avaliacao.cumprimentoTarefas}">
+				value="#{avaliacaoEmpresaBean.avaliacao.cumprimentoDasTarefas}">
 				<f:selectItem itemLabel="Insuficiente" itemValue="Insuficiente" />
 				<f:selectItem itemLabel="Regular" itemValue="Regular" />
 				<f:selectItem itemLabel="Bom" itemValue="Bom" />
@@ -55,7 +68,7 @@
 
 			<p:outputLabel for="aprendizagem" value="4. Aprendizagem:" />
 			<p:selectOneMenu id="aprendizagem"
-				value="#{avaliacaoOrientadorBean.avaliacao.aprendizagem}">
+				value="#{avaliacaoEmpresaBean.avaliacao.aprendizagem}">
 				<f:selectItem itemLabel="Insuficiente" itemValue="Insuficiente" />
 				<f:selectItem itemLabel="Regular" itemValue="Regular" />
 				<f:selectItem itemLabel="Bom" itemValue="Bom" />
@@ -64,36 +77,44 @@
 
 			<p:outputLabel for="desempenho" value="5. Desempenho:" />
 			<p:selectOneMenu id="desempenho"
-				value="#{avaliacaoOrientadorBean.avaliacao.desempenho}">
+				value="#{avaliacaoEmpresaBean.avaliacao.desempenho}">
 				<f:selectItem itemLabel="Insuficiente" itemValue="Insuficiente" />
 				<f:selectItem itemLabel="Regular" itemValue="Regular" />
 				<f:selectItem itemLabel="Bom" itemValue="Bom" />
 				<f:selectItem itemLabel="Muito Bom" itemValue="Muito Bom" />
 			</p:selectOneMenu>
 
-			<p:commandButton value="Voltar" action="#{gestaoPaginasBean.voltar}" immediate="true" />
-			<p:commandButton value="Enviar" action="#{avaliacaoOrientadorBean.salvarAvaliacao}" update="form tabela" />
+			<p:commandButton value="Voltar" action="#{gestaoPaginasBean.voltar}"
+				immediate="true" />
+			<p:commandButton value="Enviar"
+				action="#{avaliacaoEmpresaBean.salvarAvaliacao}"
+				update="form tabela" />
 		</h:panelGrid>
 
 		<h:panelGrid columns="2">
-			<p:dataTable value="#{avaliacaoOrientadorBean.listaAvaliacoes}" var="o" border="1" id="tabela" paginator="true" rows="5">
-				<p:column headerText="Id" width="15">
-					<p:outputLabel value="#{o.id}" />
+			<p:dataTable value="#{avaliacaoEmpresaBean.listaAvaliacoes}" var="avaliacao"
+				border="1" id="tabela" paginator="true" rows="5"
+				paginatorPosition="bottom">
+				<p:column headerText="Empresa">
+					<p:outputLabel value="#{avaliacao.empresa.nome}" />
+				</p:column>
+				<p:column headerText="Aluno avaliado">
+					<p:outputLabel value="#{avaliacao.aluno.nome}" />
 				</p:column>
 				<p:column headerText="Rendimento de Trabalho">
-					<p:outputLabel value="#{o.rendimentoTrabalho}" />
+					<p:outputLabel value="#{avaliacao.rendimentoDeTrabalho}" />
 				</p:column>
 				<p:column headerText="Conhecimentos">
-					<p:outputLabel value="#{o.conhecimentos}" />
+					<p:outputLabel value="#{avaliacao.conhecimentos}" />
 				</p:column>
 				<p:column headerText="Cumprimento das Tarefas">
-					<p:outputLabel value="#{o.cumprimentoTarefas}" />
+					<p:outputLabel value="#{avaliacao.cumprimentoDasTarefas}" />
 				</p:column>
 				<p:column headerText="Aprendizagem">
-					<p:outputLabel value="#{o.aprendizagem}" />
+					<p:outputLabel value="#{avaliacao.aprendizagem}" />
 				</p:column>
 				<p:column headerText="Desempenho">
-					<p:outputLabel value="#{o.desempenho}" />
+					<p:outputLabel value="#{avaliacao.desempenho}" />
 				</p:column>
 			</p:dataTable>
 		</h:panelGrid>

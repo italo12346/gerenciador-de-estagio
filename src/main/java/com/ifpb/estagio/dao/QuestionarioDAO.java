@@ -2,35 +2,37 @@ package com.ifpb.estagio.dao;
 
 import java.io.Serializable;
 import java.util.List;
-
 import javax.enterprise.context.Dependent;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
-import com.ifpb.estagio.model.AvaliacaoDoOrientador;
-
 @Dependent
-public class AvaliacaoDoOrientadorDAO implements Serializable {
+public class QuestionarioDAO<T, ID extends Serializable> implements Serializable {
     private static final long serialVersionUID = 1L;
-    private static EntityManager manager = ConnectionFactory.getEntityManager();
+    private final Class<T> entityClass;
+    private final EntityManager manager = ConnectionFactory.getEntityManager();
 
-    public AvaliacaoDoOrientador buscarPorId(Long id) {
+    public QuestionarioDAO(Class<T> entityClass) {
+        this.entityClass = entityClass;
+    }
+
+    public T buscarPorId(ID id) {
         try {
-            return manager.find(AvaliacaoDoOrientador.class, id);
+            return manager.find(entityClass, id);
         } finally {
             System.out.println("busca ok");
         }
     }
 
-    public static void salvar(AvaliacaoDoOrientador respostas) {
+    public void salvar(T entity) {
         EntityTransaction transaction = manager.getTransaction();
         try {
             transaction.begin();
-            if (respostas.getId() == null) {
-                manager.persist(respostas);
+            if (getId(entity) == null) {
+                manager.persist(entity);
             } else {
-                manager.merge(respostas);
+                manager.merge(entity);
             }
             transaction.commit();
         } catch (Exception e) {
@@ -43,13 +45,13 @@ public class AvaliacaoDoOrientadorDAO implements Serializable {
         }
     }
 
-    public void remover(Long id) {
+    public void remover(ID id) {
         EntityTransaction transaction = manager.getTransaction();
         try {
             transaction.begin();
-            AvaliacaoDoOrientador respostas = manager.find(AvaliacaoDoOrientador.class, id);
-            if (respostas != null) {
-                manager.remove(respostas);
+            T entity = manager.find(entityClass, id);
+            if (entity != null) {
+                manager.remove(entity);
             }
             transaction.commit();
         } catch (Exception e) {
@@ -62,7 +64,7 @@ public class AvaliacaoDoOrientadorDAO implements Serializable {
     }
 
     @SuppressWarnings("unchecked")
-    public List<AvaliacaoDoOrientador> buscarTodos(String jpql) {
+    public List<T> buscarTodos(String jpql) {
         EntityTransaction transaction = manager.getTransaction();
         try {
             transaction.begin();
@@ -72,5 +74,11 @@ public class AvaliacaoDoOrientadorDAO implements Serializable {
             transaction.commit();
             System.out.println("listar ok");
         }
+    }
+
+    private Serializable getId(T entity) {
+        // Implementar lógica para obter o ID da entidade
+        // Exemplo: return entity.getId();
+        return null;
     }
 }

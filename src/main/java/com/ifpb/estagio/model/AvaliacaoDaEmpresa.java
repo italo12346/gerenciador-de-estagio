@@ -35,9 +35,14 @@ public class AvaliacaoDaEmpresa implements Serializable, Base {
 	private String desempenho;
 
 	@OneToOne
-	private Aluno aluno;
-
 	@JoinColumn(name = "aluno_id")
+	private Aluno aluno;
+	
+	@OneToOne
+	@JoinColumn(name = "empresa_id")
+	private Empresa empresa;
+
+
 
 	public Long getId() {
 		return id;
@@ -87,6 +92,21 @@ public class AvaliacaoDaEmpresa implements Serializable, Base {
 		this.desempenho = desempenho;
 	}
 
-	// Getters and setters
+	public Aluno getAluno() {
+		return aluno;
+	}
+
+	public void setAluno(Aluno aluno) {
+		this.aluno = aluno;
+	}
+
+	public Empresa getEmpresa() {
+		return empresa;
+	}
+
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
+	}
+
 
 }

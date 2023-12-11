@@ -13,51 +13,51 @@ import com.ifpb.estagio.servic.AvaliacaoOrientadorService;
 @SessionScoped
 public class AvaliacaoOrientadorBean implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	private AvaliacaoOrientadorService avaliacaoService;
-	private AvaliacaoDoOrientador avaliacao;
-	private List<AvaliacaoDoOrientador> listaAvaliacoes;
+    private static final long serialVersionUID = 1L;
+    private AvaliacaoOrientadorService avaliacaoService;
+    private AvaliacaoDoOrientador avaliacao;
+    private List<AvaliacaoDoOrientador> listaAvaliacoes;
 
-	public AvaliacaoOrientadorBean() {
-		this.avaliacaoService = new AvaliacaoOrientadorService();
-		this.avaliacao = new AvaliacaoDoOrientador();
-		this.listaAvaliacoes = avaliacaoService.listarTodasAvaliacoes("SELECT a FROM AvaliacaoDoOrientador a");
-	}
+    public AvaliacaoOrientadorBean() {
+        this.avaliacaoService = new AvaliacaoOrientadorService();
+        this.avaliacao = new AvaliacaoDoOrientador();
+        this.listaAvaliacoes = avaliacaoService.listarTodasAvaliacoes("SELECT a FROM AvaliacaoDoOrientador a");
+    }
 
-	public void carregarAvaliacao(Long id) {
-		this.avaliacao = avaliacaoService.buscarAvaliacaoPorId(id);
-	}
+    public void carregarAvaliacao(Long id) {
+        this.avaliacao = avaliacaoService.buscarAvaliacaoPorId(id);
+    }
 
-	public void salvarAvaliacao() {
-		avaliacaoService.salvarAvaliacao(avaliacao);
-		this.avaliacao = new AvaliacaoDoOrientador(); // Limpar os campos após salvar
-		atualizarListaAvaliacoes();
-	}
+    public void salvarAvaliacao() {
+        avaliacaoService.salvarAvaliacao(avaliacao);
+        this.avaliacao = new AvaliacaoDoOrientador(); // Limpar os campos após salvar
+        atualizarListaAvaliacoes();
+    }
 
-	public void removerAvaliacao(Long id) {
-		avaliacaoService.removerAvaliacao(id);
-		atualizarListaAvaliacoes();
-	}
+    public void removerAvaliacao(Long id) {
+        avaliacaoService.removerAvaliacao(id);
+        atualizarListaAvaliacoes();
+    }
 
-	private void atualizarListaAvaliacoes() {
-		this.listaAvaliacoes = avaliacaoService.listarTodasAvaliacoes("SELECT a FROM AvaliacaoDoOrientador a");
-	}
+    private void atualizarListaAvaliacoes() {
+        this.listaAvaliacoes = avaliacaoService.listarTodasAvaliacoes("SELECT a FROM AvaliacaoDoOrientador a");
+    }
 
-	// Getters e Setters
+    // Getters e Setters
 
-	public AvaliacaoDoOrientador getAvaliacao() {
-		return avaliacao;
-	}
+    public AvaliacaoDoOrientador getAvaliacao() {
+        return avaliacao;
+    }
 
-	public void setAvaliacao(AvaliacaoDoOrientador avaliacao) {
-		this.avaliacao = avaliacao;
-	}
+    public void setAvaliacao(AvaliacaoDoOrientador avaliacao) {
+        this.avaliacao = avaliacao;
+    }
 
-	public List<AvaliacaoDoOrientador> getListaAvaliacoes() {
-		return listaAvaliacoes;
-	}
+    public List<AvaliacaoDoOrientador> getListaAvaliacoes() {
+        return listaAvaliacoes;
+    }
 
-	public void setListaAvaliacoes(List<AvaliacaoDoOrientador> listaAvaliacoes) {
-		this.listaAvaliacoes = listaAvaliacoes;
-	}
+    public void setListaAvaliacoes(List<AvaliacaoDoOrientador> listaAvaliacoes) {
+        this.listaAvaliacoes = listaAvaliacoes;
+    }
 }

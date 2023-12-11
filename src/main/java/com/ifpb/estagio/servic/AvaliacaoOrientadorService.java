@@ -7,10 +7,10 @@ import com.ifpb.estagio.model.AvaliacaoDoOrientador;
 
 public class AvaliacaoOrientadorService {
 
-    private QuestionarioDAO questionarioDAO;
+    private QuestionarioDAO<AvaliacaoDoOrientador, Long> questionarioDAO;
 
     public AvaliacaoOrientadorService() {
-        this.questionarioDAO = new QuestionarioDAO();
+        this.questionarioDAO = new QuestionarioDAO<>(AvaliacaoDoOrientador.class);
     }
 
     public AvaliacaoDoOrientador buscarAvaliacaoPorId(Long id) {
@@ -18,7 +18,7 @@ public class AvaliacaoOrientadorService {
     }
 
     public void salvarAvaliacao(AvaliacaoDoOrientador avaliacao) {
-        QuestionarioDAO.salvar(avaliacao);
+        questionarioDAO.salvar(avaliacao);
     }
 
     public void removerAvaliacao(Long id) {

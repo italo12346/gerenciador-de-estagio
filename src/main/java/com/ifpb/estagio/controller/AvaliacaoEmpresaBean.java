@@ -6,20 +6,22 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import com.ifpb.estagio.model.AvaliacaoDaEmpresa;
+import com.ifpb.estagio.servic.AvaliacaoEmpresaService;
 
 @ManagedBean
 @SessionScoped
 public class AvaliacaoEmpresaBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private AvaliacaoEmpresaBean avaliacaoService;
-    private AvaliacaoEmpresaBean avaliacao;
-    private List<AvaliacaoEmpresaBean> listaAvaliacoes;
+    private AvaliacaoEmpresaService avaliacaoService;
+    private AvaliacaoDaEmpresa avaliacao;
+    private List<AvaliacaoDaEmpresa> listaAvaliacoes;
 
     public AvaliacaoEmpresaBean() {
-        this.avaliacaoService = new AvaliacaoEmpresaBean();
-        this.avaliacao = new AvaliacaoEmpresaBean();
-        this.listaAvaliacoes = avaliacaoService.listarTodasAvaliacoes("SELECT a FROM AvaliacaoDoEstagiario a");
+        this.avaliacaoService = new AvaliacaoEmpresaService();
+        this.avaliacao = new AvaliacaoDaEmpresa();
+        this.listaAvaliacoes = avaliacaoService.listarTodasAvaliacoes("SELECT a FROM AvaliacaoDaEmpresa a");
     }
 
     public void carregarAvaliacao(Long id) {
@@ -28,7 +30,7 @@ public class AvaliacaoEmpresaBean implements Serializable {
 
     public void salvarAvaliacao() {
         avaliacaoService.salvarAvaliacao(avaliacao);
-        this.avaliacao = new AvaliacaoEmpresaBean(); // Limpar os campos após salvar
+        this.avaliacao = new AvaliacaoDaEmpresa(); // Limpar os campos após salvar
         atualizarListaAvaliacoes();
     }
 
@@ -43,19 +45,19 @@ public class AvaliacaoEmpresaBean implements Serializable {
 
     // Getters e Setters
 
-    public AvaliacaoEmpresaBean getAvaliacao() {
+    public AvaliacaoDaEmpresa getAvaliacao() {
         return avaliacao;
     }
 
-    public void setAvaliacao(AvaliacaoEmpresaBean avaliacao) {
+    public void setAvaliacao(AvaliacaoDaEmpresa avaliacao) {
         this.avaliacao = avaliacao;
     }
 
-    public List<AvaliacaoDoEstagiario> getListaAvaliacoes() {
+    public List<AvaliacaoDaEmpresa> getListaAvaliacoes() {
         return listaAvaliacoes;
     }
 
-    public void setListaAvaliacoes(List<AvaliacaoDoEstagiario> listaAvaliacoes) {
+    public void setListaAvaliacoes(List<AvaliacaoDaEmpresa> listaAvaliacoes) {
         this.listaAvaliacoes = listaAvaliacoes;
     }
 }
