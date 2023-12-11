@@ -49,11 +49,9 @@ public class EmpresaService implements Serializable {
     
     public Empresa buscarPorId(Long id) {
         try {
-        	System.out.println(id);
             return dao.buscarPorId(Empresa.class, id);
         } catch (NoResultException e) {
             // Tratar caso a empresa com o ID fornecido não seja encontrada
-        	System.out.println(id);
             return null;
         }
     }
